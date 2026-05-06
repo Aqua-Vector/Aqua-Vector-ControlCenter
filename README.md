@@ -1,4 +1,4 @@
-# Aqua-Vector-Torpedo
+# Aqua-Vector-ControlCenter
 
 통제소 측 애플리케이션 소프트웨어 (ZYBO-Z7 / PetaLinux)
 
