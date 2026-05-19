@@ -25,6 +25,8 @@ public:
     
     void startCalibration(int duration_sec);
     std::vector<std::vector<PointGrid>> getGridObstacles();
+    std::vector<Point2D> getBackgroundPoints() { return background_points; }
+    bool getDynamicCarPosition(Point2D& car_pos);
 };
 
 #endif

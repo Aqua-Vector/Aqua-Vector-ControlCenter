@@ -4,11 +4,14 @@
 #include <termios.h>
 #include <cstring>
 #include <chrono>
-#include <cmath>    // std::isnan, std::nanf 사용
+#include <cmath>
+#include <thread> // 스레드 사용을 위해 추가
+#include <mutex>  // 데이터 충돌 방지를 위해 추가
 #include "LidarNode.h"
 #include "DataTypes.h"
+#include "CrcCalculator.h"
 
-#pragma pack(push, 1)
+#pragma pack(push, 1)   
 struct DownlinkPacket {
     uint8_t  sync;          // [0] 0xAA
     uint32_t timestamp_us;  // [1-4] Control station time (us)
@@ -21,7 +24,6 @@ struct DownlinkPacket {
 };
 #pragma pack(pop)
 
-// CRC16-CCITT 계산 함수
 uint16_t calculateCRC16(const uint8_t* data, size_t len) {
     uint16_t crc = 0xFFFF;
     for (size_t i = 0; i < len; i++) {
@@ -33,6 +35,28 @@ uint16_t calculateCRC16(const uint8_t* data, size_t len) {
     }
     return crc;
 }
+
+// ----------------------------------------------------
+// [스레드 간 공유 데이터]
+std::mutex data_mutex;         // 동시에 데이터 읽기/쓰기 방지용 자물쇠
+Point2D shared_torpedo_pos;    // 공유 타겟 위치
+bool shared_is_found = false;  // 공유 타겟 발견 여부
+
+// [라이다 전담 스레드 함수]
+// 이 함수는 백그라운드에서 50ms마다 계속 돌면서 최신 좌표만 갱신합니다.
+void lidarThreadFunction(LidarNode* lidar) {
+    Point2D latest_pos;
+    while (true) {
+        // grabScanDataHq 때문에 여기서 50ms 동안 대기(블로킹)됨
+        if (lidar->getDynamicCarPosition(latest_pos)) {
+            // 데이터가 나오면 자물쇠를 걸고 안전하게 공유 변수 업데이트
+            std::lock_guard<std::mutex> lock(data_mutex);
+            shared_torpedo_pos = latest_pos;
+            shared_is_found = true;
+        }
+    }
+}
+// ----------------------------------------------------
 
 int main() {
     std::cout << "========================================" << std::endl;
@@ -63,13 +87,16 @@ int main() {
     lidar->startCalibration(4);
     std::cout << "[DONE] Calibration finished." << std::endl;
 
-    // 3. 추적 및 전송
+    // 3. 라이다 데이터 수집 스레드 실행
+    // 백그라운드에서 라이다 데이터만 계속 업데이트하는 스레드 분리 시작
+    std::thread lidar_thread(lidarThreadFunction, lidar);
+    lidar_thread.detach(); // 메인 루프와 완전히 독립적으로 동작하도록 분리
+
+    // 4. 추적 및 전송 (메인 스레드)
     std::cout << "\n[STEP 2] Press ENTER to start real-time TX (10ms)...";
     std::cin.get();
 
     uint16_t sequence = 0;
-    Point2D torpedo_pos;
-    bool is_found = false; // 타겟 상태 유지 변수 (데이터 홀드용)
     auto start_time = std::chrono::steady_clock::now();
 
     while (true) {
@@ -77,13 +104,14 @@ int main() {
         auto loop_start = std::chrono::steady_clock::now(); 
 
         DownlinkPacket pkt;
-        Point2D latest_pos;
-
-        // 라이다 드라이버가 새로운 한 바퀴 스캔을 성공적으로 수신/연산했는지 확인
-        // 성공 시 데이터 업데이트 및 발견 상태 유지, 실패 시 기존의 데이터와 발견 상태를 재활용(Hold)
-        if (lidar->getDynamicCarPosition(latest_pos)) {
-            torpedo_pos = latest_pos;
-            is_found = true;
+        
+        // 라이다 스레드가 갱신해둔 데이터를 자물쇠 걸고 복사해옴 (아주 찰나의 시간만 소요됨)
+        Point2D current_pos;
+        bool current_is_found;
+        {
+            std::lock_guard<std::mutex> lock(data_mutex);
+            current_pos = shared_torpedo_pos;
+            current_is_found = shared_is_found;
         }
 
         // [0] Sync
@@ -93,7 +121,7 @@ int main() {
         auto now = std::chrono::steady_clock::now();
         pkt.timestamp_us = std::chrono::duration_cast<std::chrono::microseconds>(now - start_time).count();
 
-        // 모니터링 출력용 시간 계산 (시:분:초.밀리초)
+        // 모니터링 출력용 시간 계산
         auto sys_now = std::chrono::system_clock::now();
         std::time_t now_c = std::chrono::system_clock::to_time_t(sys_now);
         std::tm* local_tm = std::localtime(&now_c);
@@ -105,20 +133,19 @@ int main() {
         // [5-6] Sequence
         pkt.seq = sequence++;
 
-        // [7-14] Target Coordinates (가야할 곳, 0.0 고정)
+        // [7-14] Target Coordinates
         pkt.target_x = 0.0f;
         pkt.target_y = 0.0f;
 
-        // [15-22] Lidar Measurement (mm 단위를 m 단위로 변환)
-        if (is_found) {
-            pkt.torpedo_x = torpedo_pos.x / 1000.0f;
-            pkt.torpedo_y = torpedo_pos.y / 1000.0f;
+        // [15-22] Lidar Measurement
+        if (current_is_found) {
+            pkt.torpedo_x = current_pos.x / 1000.0f;
+            pkt.torpedo_y = current_pos.y / 1000.0f;
             
             printf("[TX 10ms] time: %02d:%02d:%02d.%03ld | SEQ: %u | X: %.3f m, Y: %.3f m\n", 
                    local_tm->tm_hour, local_tm->tm_min, local_tm->tm_sec, ms, 
                    pkt.seq, pkt.torpedo_x, pkt.torpedo_y);
         } else {
-            // 최초 기동 시 등 한 번도 물체를 못 찾았을 때는 NaN 처리
             pkt.torpedo_x = std::nanf("");
             pkt.torpedo_y = std::nanf("");
             
@@ -126,19 +153,19 @@ int main() {
                    local_tm->tm_hour, local_tm->tm_min, local_tm->tm_sec, ms, pkt.seq);
         }
 
-        // [23-24] CRC16-CCITT (마지막 2바이트 제외한 23바이트 계산)
-        pkt.crc16 = calculateCRC16((uint8_t*)&pkt, 23);
+        // [23-24] CRC16-CCITT 
+        pkt.crc16 = CrcCalculator::CalculateCrc16((uint8_t*)&pkt, 23);
 
-        // UART 전송 (요구사항대로 10ms마다 무조건 패킷 발송)
+        // UART 전송 (이제 라이다 블로킹 영향을 받지 않고 무조건 10ms 주기로 실행됨)
         write(uart_fd, &pkt, sizeof(pkt));
 
-        // 10ms 루프 주기를 정밀하게 맞추기 위한 연산 속도 차감 대기 로직
+        // 10ms 루프 주기 정밀 맞춤 로직
         auto loop_end = std::chrono::steady_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(loop_end - loop_start).count();
         
         long sleep_time = 10000 - elapsed; // 10,000 microsecond = 10 millisecond
         if (sleep_time > 0) {
-            usleep(sleep_time); // 남은 시간만큼만 대기
+            usleep(sleep_time);
         }
     }
 

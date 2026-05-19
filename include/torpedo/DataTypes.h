@@ -7,8 +7,17 @@ struct Point2D {
 };
 
 struct PointGrid {
-    int x; // 5cm (50mm) 단위
+    int x; // 50mm 단위
     int y; 
+};
+
+// 어뢰의 현재 상태를 담는 구조체
+struct TorpedoPose {
+    Point2D position;
+    float speed;
+    float heading;
+    float acc_x;
+    float acc_y;
 };
 
 #endif
