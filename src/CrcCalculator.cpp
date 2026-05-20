@@ -78,49 +78,49 @@ const uint8_t CrcCalculator::crc8_table[256] = {
 };
 
 uint8_t CrcCalculator::CalculateSum(const uint8_t* buf, size_t len) {
-	uint8_t check = 0;
-	while(len--) {
-		check += *buf++;
-	}
-	return (uint8_t)(256u - check);
+    uint8_t check = 0;
+    while(len--) {
+        check += *buf++;
+    }
+    return (uint8_t)(256u - check);
 }
 
 uint8_t CrcCalculator::CalculateXor(const uint8_t* buf, size_t len) {
-	if (len < 2) return (len == 1) ? buf[0] : 0;
+    if (len < 2) return (len == 1) ? buf[0] : 0;
 
-	uint8_t check = *buf;
-	uint8_t temp = *(buf + 1);
-	buf += 2;
-	len -= 2;
-	check ^= temp;
-	while (len--) {
-		check ^= (*buf++);
-	}
-	return check;
+    uint8_t check = *buf;
+    uint8_t temp = *(buf + 1);
+    buf += 2;
+    len -= 2;
+    check ^= temp;
+    while (len--) {
+        check ^= (*buf++);
+    }
+    return check;
 }
 
 uint8_t CrcCalculator::CalculateCrc8(const uint8_t* buf, size_t len) {
-	uint8_t check = 0;
-	while(len--) {
-		check = crc8_table[check ^ (*buf++)];
-	}
-	return check;
+    uint8_t check = 0;
+    while(len--) {
+        check = crc8_table[check ^ (*buf++)];
+    }
+    return check;
 }
 
 uint16_t CrcCalculator::CalculateCrc16(const uint8_t* buf, size_t len) {
-	int index;
-	uint16_t check = 0;
-	uint8_t crc_low = 0xFF;
-	uint8_t crc_high = 0xFF;
+    int index;
+    uint16_t check = 0;
+    uint8_t crc_low = 0xFF;
+    uint8_t crc_high = 0xFF;
 
-	while (len--) {
-		index = crc_high ^ (*buf++);
-		crc_high = crc_low ^ crc16_h_table[index];
-		crc_low = crc16_l_table[index];
-	}
+    while (len--) {
+        index = crc_high ^ (*buf++);
+        crc_high = crc_low ^ crc16_h_table[index];
+        crc_low = crc16_l_table[index];
+    }
 
-	check += crc_high;
-	check <<= 8;
-	check += crc_low;
-	return check;
+    check += crc_high;
+    check <<= 8;
+    check += crc_low;
+    return check;
 }

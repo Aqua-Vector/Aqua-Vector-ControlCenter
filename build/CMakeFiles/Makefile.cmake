@@ -117,6 +117,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/lidar_test.dir/DependInfo.cmake"
   "CMakeFiles/torpedo_control.dir/DependInfo.cmake"
   )

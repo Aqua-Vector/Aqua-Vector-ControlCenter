@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/user/torpedo_control_workspace
+CMAKE_SOURCE_DIR = /home/user/Aqua-Vector-ControlCenter
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/user/torpedo_control_workspace/build
+CMAKE_BINARY_DIR = /home/user/Aqua-Vector-ControlCenter/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/torpedo_control_workspace/build/CMakeFiles /home/user/torpedo_control_workspace/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/Aqua-Vector-ControlCenter/build/CMakeFiles /home/user/Aqua-Vector-ControlCenter/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/torpedo_control_workspace/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/Aqua-Vector-ControlCenter/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,19 +111,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named lidar_test
-
-# Build rule for target.
-lidar_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 lidar_test
-.PHONY : lidar_test
-
-# fast build rule for target.
-lidar_test/fast:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/build
-.PHONY : lidar_test/fast
-
-#=============================================================================
 # Target rules for targets named torpedo_control
 
 # Build rule for target.
@@ -142,7 +129,6 @@ src/ControlLogic.o: src/ControlLogic.cpp.o
 
 # target to build an object file
 src/ControlLogic.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/ControlLogic.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.o
 .PHONY : src/ControlLogic.cpp.o
 
@@ -152,7 +138,6 @@ src/ControlLogic.i: src/ControlLogic.cpp.i
 
 # target to preprocess a source file
 src/ControlLogic.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/ControlLogic.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.i
 .PHONY : src/ControlLogic.cpp.i
 
@@ -162,7 +147,6 @@ src/ControlLogic.s: src/ControlLogic.cpp.s
 
 # target to generate assembly for a file
 src/ControlLogic.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/ControlLogic.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.s
 .PHONY : src/ControlLogic.cpp.s
 
@@ -172,7 +156,6 @@ src/CrcCalculator.o: src/CrcCalculator.cpp.o
 
 # target to build an object file
 src/CrcCalculator.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/CrcCalculator.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.o
 .PHONY : src/CrcCalculator.cpp.o
 
@@ -182,7 +165,6 @@ src/CrcCalculator.i: src/CrcCalculator.cpp.i
 
 # target to preprocess a source file
 src/CrcCalculator.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/CrcCalculator.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.i
 .PHONY : src/CrcCalculator.cpp.i
 
@@ -192,7 +174,6 @@ src/CrcCalculator.s: src/CrcCalculator.cpp.s
 
 # target to generate assembly for a file
 src/CrcCalculator.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/CrcCalculator.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.s
 .PHONY : src/CrcCalculator.cpp.s
 
@@ -202,7 +183,6 @@ src/LidarNode.o: src/LidarNode.cpp.o
 
 # target to build an object file
 src/LidarNode.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/LidarNode.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.o
 .PHONY : src/LidarNode.cpp.o
 
@@ -212,7 +192,6 @@ src/LidarNode.i: src/LidarNode.cpp.i
 
 # target to preprocess a source file
 src/LidarNode.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/LidarNode.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.i
 .PHONY : src/LidarNode.cpp.i
 
@@ -222,7 +201,6 @@ src/LidarNode.s: src/LidarNode.cpp.s
 
 # target to generate assembly for a file
 src/LidarNode.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/LidarNode.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.s
 .PHONY : src/LidarNode.cpp.s
 
@@ -232,7 +210,6 @@ src/NetworkNode.o: src/NetworkNode.cpp.o
 
 # target to build an object file
 src/NetworkNode.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/NetworkNode.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.o
 .PHONY : src/NetworkNode.cpp.o
 
@@ -242,7 +219,6 @@ src/NetworkNode.i: src/NetworkNode.cpp.i
 
 # target to preprocess a source file
 src/NetworkNode.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/NetworkNode.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.i
 .PHONY : src/NetworkNode.cpp.i
 
@@ -252,7 +228,6 @@ src/NetworkNode.s: src/NetworkNode.cpp.s
 
 # target to generate assembly for a file
 src/NetworkNode.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/NetworkNode.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.s
 .PHONY : src/NetworkNode.cpp.s
 
@@ -262,7 +237,6 @@ src/ServoNode.o: src/ServoNode.cpp.o
 
 # target to build an object file
 src/ServoNode.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/ServoNode.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.o
 .PHONY : src/ServoNode.cpp.o
 
@@ -272,7 +246,6 @@ src/ServoNode.i: src/ServoNode.cpp.i
 
 # target to preprocess a source file
 src/ServoNode.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/ServoNode.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.i
 .PHONY : src/ServoNode.cpp.i
 
@@ -282,7 +255,6 @@ src/ServoNode.s: src/ServoNode.cpp.s
 
 # target to generate assembly for a file
 src/ServoNode.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/ServoNode.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.s
 .PHONY : src/ServoNode.cpp.s
 
@@ -292,7 +264,6 @@ src/UartNode.o: src/UartNode.cpp.o
 
 # target to build an object file
 src/UartNode.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/UartNode.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/UartNode.cpp.o
 .PHONY : src/UartNode.cpp.o
 
@@ -302,7 +273,6 @@ src/UartNode.i: src/UartNode.cpp.i
 
 # target to preprocess a source file
 src/UartNode.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/UartNode.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/UartNode.cpp.i
 .PHONY : src/UartNode.cpp.i
 
@@ -312,7 +282,6 @@ src/UartNode.s: src/UartNode.cpp.s
 
 # target to generate assembly for a file
 src/UartNode.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/UartNode.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/UartNode.cpp.s
 .PHONY : src/UartNode.cpp.s
 
@@ -322,7 +291,6 @@ src/arch/linux/net_serial.o: src/arch/linux/net_serial.cpp.o
 
 # target to build an object file
 src/arch/linux/net_serial.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/arch/linux/net_serial.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.o
 .PHONY : src/arch/linux/net_serial.cpp.o
 
@@ -332,7 +300,6 @@ src/arch/linux/net_serial.i: src/arch/linux/net_serial.cpp.i
 
 # target to preprocess a source file
 src/arch/linux/net_serial.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/arch/linux/net_serial.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.i
 .PHONY : src/arch/linux/net_serial.cpp.i
 
@@ -342,7 +309,6 @@ src/arch/linux/net_serial.s: src/arch/linux/net_serial.cpp.s
 
 # target to generate assembly for a file
 src/arch/linux/net_serial.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/arch/linux/net_serial.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.s
 .PHONY : src/arch/linux/net_serial.cpp.s
 
@@ -352,7 +318,6 @@ src/arch/linux/net_socket.o: src/arch/linux/net_socket.cpp.o
 
 # target to build an object file
 src/arch/linux/net_socket.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/arch/linux/net_socket.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.o
 .PHONY : src/arch/linux/net_socket.cpp.o
 
@@ -362,7 +327,6 @@ src/arch/linux/net_socket.i: src/arch/linux/net_socket.cpp.i
 
 # target to preprocess a source file
 src/arch/linux/net_socket.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/arch/linux/net_socket.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.i
 .PHONY : src/arch/linux/net_socket.cpp.i
 
@@ -372,7 +336,6 @@ src/arch/linux/net_socket.s: src/arch/linux/net_socket.cpp.s
 
 # target to generate assembly for a file
 src/arch/linux/net_socket.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/arch/linux/net_socket.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.s
 .PHONY : src/arch/linux/net_socket.cpp.s
 
@@ -382,7 +345,6 @@ src/arch/linux/timer.o: src/arch/linux/timer.cpp.o
 
 # target to build an object file
 src/arch/linux/timer.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/arch/linux/timer.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.o
 .PHONY : src/arch/linux/timer.cpp.o
 
@@ -392,7 +354,6 @@ src/arch/linux/timer.i: src/arch/linux/timer.cpp.i
 
 # target to preprocess a source file
 src/arch/linux/timer.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/arch/linux/timer.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.i
 .PHONY : src/arch/linux/timer.cpp.i
 
@@ -402,7 +363,6 @@ src/arch/linux/timer.s: src/arch/linux/timer.cpp.s
 
 # target to generate assembly for a file
 src/arch/linux/timer.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/arch/linux/timer.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.s
 .PHONY : src/arch/linux/timer.cpp.s
 
@@ -412,7 +372,6 @@ src/dataunpacker/dataunpacker.o: src/dataunpacker/dataunpacker.cpp.o
 
 # target to build an object file
 src/dataunpacker/dataunpacker.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/dataunpacker/dataunpacker.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.o
 .PHONY : src/dataunpacker/dataunpacker.cpp.o
 
@@ -422,7 +381,6 @@ src/dataunpacker/dataunpacker.i: src/dataunpacker/dataunpacker.cpp.i
 
 # target to preprocess a source file
 src/dataunpacker/dataunpacker.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/dataunpacker/dataunpacker.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.i
 .PHONY : src/dataunpacker/dataunpacker.cpp.i
 
@@ -432,7 +390,6 @@ src/dataunpacker/dataunpacker.s: src/dataunpacker/dataunpacker.cpp.s
 
 # target to generate assembly for a file
 src/dataunpacker/dataunpacker.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/dataunpacker/dataunpacker.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.s
 .PHONY : src/dataunpacker/dataunpacker.cpp.s
 
@@ -442,7 +399,6 @@ src/dataunpacker/unpacker/handler_capsules.o: src/dataunpacker/unpacker/handler_
 
 # target to build an object file
 src/dataunpacker/unpacker/handler_capsules.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/dataunpacker/unpacker/handler_capsules.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.o
 .PHONY : src/dataunpacker/unpacker/handler_capsules.cpp.o
 
@@ -452,7 +408,6 @@ src/dataunpacker/unpacker/handler_capsules.i: src/dataunpacker/unpacker/handler_
 
 # target to preprocess a source file
 src/dataunpacker/unpacker/handler_capsules.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/dataunpacker/unpacker/handler_capsules.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.i
 .PHONY : src/dataunpacker/unpacker/handler_capsules.cpp.i
 
@@ -462,7 +417,6 @@ src/dataunpacker/unpacker/handler_capsules.s: src/dataunpacker/unpacker/handler_
 
 # target to generate assembly for a file
 src/dataunpacker/unpacker/handler_capsules.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/dataunpacker/unpacker/handler_capsules.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.s
 .PHONY : src/dataunpacker/unpacker/handler_capsules.cpp.s
 
@@ -472,7 +426,6 @@ src/dataunpacker/unpacker/handler_hqnode.o: src/dataunpacker/unpacker/handler_hq
 
 # target to build an object file
 src/dataunpacker/unpacker/handler_hqnode.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.o
 .PHONY : src/dataunpacker/unpacker/handler_hqnode.cpp.o
 
@@ -482,7 +435,6 @@ src/dataunpacker/unpacker/handler_hqnode.i: src/dataunpacker/unpacker/handler_hq
 
 # target to preprocess a source file
 src/dataunpacker/unpacker/handler_hqnode.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.i
 .PHONY : src/dataunpacker/unpacker/handler_hqnode.cpp.i
 
@@ -492,7 +444,6 @@ src/dataunpacker/unpacker/handler_hqnode.s: src/dataunpacker/unpacker/handler_hq
 
 # target to generate assembly for a file
 src/dataunpacker/unpacker/handler_hqnode.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.s
 .PHONY : src/dataunpacker/unpacker/handler_hqnode.cpp.s
 
@@ -502,7 +453,6 @@ src/dataunpacker/unpacker/handler_normalnode.o: src/dataunpacker/unpacker/handle
 
 # target to build an object file
 src/dataunpacker/unpacker/handler_normalnode.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.o
 .PHONY : src/dataunpacker/unpacker/handler_normalnode.cpp.o
 
@@ -512,7 +462,6 @@ src/dataunpacker/unpacker/handler_normalnode.i: src/dataunpacker/unpacker/handle
 
 # target to preprocess a source file
 src/dataunpacker/unpacker/handler_normalnode.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.i
 .PHONY : src/dataunpacker/unpacker/handler_normalnode.cpp.i
 
@@ -522,7 +471,6 @@ src/dataunpacker/unpacker/handler_normalnode.s: src/dataunpacker/unpacker/handle
 
 # target to generate assembly for a file
 src/dataunpacker/unpacker/handler_normalnode.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.s
 .PHONY : src/dataunpacker/unpacker/handler_normalnode.cpp.s
 
@@ -532,7 +480,6 @@ src/hal/thread.o: src/hal/thread.cpp.o
 
 # target to build an object file
 src/hal/thread.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/hal/thread.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.o
 .PHONY : src/hal/thread.cpp.o
 
@@ -542,7 +489,6 @@ src/hal/thread.i: src/hal/thread.cpp.i
 
 # target to preprocess a source file
 src/hal/thread.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/hal/thread.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.i
 .PHONY : src/hal/thread.cpp.i
 
@@ -552,7 +498,6 @@ src/hal/thread.s: src/hal/thread.cpp.s
 
 # target to generate assembly for a file
 src/hal/thread.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/hal/thread.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.s
 .PHONY : src/hal/thread.cpp.s
 
@@ -583,40 +528,12 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/main_lidar_algo_test.o: src/main_lidar_algo_test.cpp.o
-
-.PHONY : src/main_lidar_algo_test.o
-
-# target to build an object file
-src/main_lidar_algo_test.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/main_lidar_algo_test.cpp.o
-.PHONY : src/main_lidar_algo_test.cpp.o
-
-src/main_lidar_algo_test.i: src/main_lidar_algo_test.cpp.i
-
-.PHONY : src/main_lidar_algo_test.i
-
-# target to preprocess a source file
-src/main_lidar_algo_test.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/main_lidar_algo_test.cpp.i
-.PHONY : src/main_lidar_algo_test.cpp.i
-
-src/main_lidar_algo_test.s: src/main_lidar_algo_test.cpp.s
-
-.PHONY : src/main_lidar_algo_test.s
-
-# target to generate assembly for a file
-src/main_lidar_algo_test.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/main_lidar_algo_test.cpp.s
-.PHONY : src/main_lidar_algo_test.cpp.s
-
 src/rplidar_driver.o: src/rplidar_driver.cpp.o
 
 .PHONY : src/rplidar_driver.o
 
 # target to build an object file
 src/rplidar_driver.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/rplidar_driver.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.o
 .PHONY : src/rplidar_driver.cpp.o
 
@@ -626,7 +543,6 @@ src/rplidar_driver.i: src/rplidar_driver.cpp.i
 
 # target to preprocess a source file
 src/rplidar_driver.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/rplidar_driver.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.i
 .PHONY : src/rplidar_driver.cpp.i
 
@@ -636,7 +552,6 @@ src/rplidar_driver.s: src/rplidar_driver.cpp.s
 
 # target to generate assembly for a file
 src/rplidar_driver.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/rplidar_driver.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.s
 .PHONY : src/rplidar_driver.cpp.s
 
@@ -646,7 +561,6 @@ src/sl_async_transceiver.o: src/sl_async_transceiver.cpp.o
 
 # target to build an object file
 src/sl_async_transceiver.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_async_transceiver.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.o
 .PHONY : src/sl_async_transceiver.cpp.o
 
@@ -656,7 +570,6 @@ src/sl_async_transceiver.i: src/sl_async_transceiver.cpp.i
 
 # target to preprocess a source file
 src/sl_async_transceiver.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_async_transceiver.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.i
 .PHONY : src/sl_async_transceiver.cpp.i
 
@@ -666,7 +579,6 @@ src/sl_async_transceiver.s: src/sl_async_transceiver.cpp.s
 
 # target to generate assembly for a file
 src/sl_async_transceiver.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_async_transceiver.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.s
 .PHONY : src/sl_async_transceiver.cpp.s
 
@@ -676,7 +588,6 @@ src/sl_crc.o: src/sl_crc.cpp.o
 
 # target to build an object file
 src/sl_crc.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_crc.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.o
 .PHONY : src/sl_crc.cpp.o
 
@@ -686,7 +597,6 @@ src/sl_crc.i: src/sl_crc.cpp.i
 
 # target to preprocess a source file
 src/sl_crc.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_crc.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.i
 .PHONY : src/sl_crc.cpp.i
 
@@ -696,7 +606,6 @@ src/sl_crc.s: src/sl_crc.cpp.s
 
 # target to generate assembly for a file
 src/sl_crc.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_crc.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.s
 .PHONY : src/sl_crc.cpp.s
 
@@ -706,7 +615,6 @@ src/sl_lidar_driver.o: src/sl_lidar_driver.cpp.o
 
 # target to build an object file
 src/sl_lidar_driver.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_lidar_driver.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.o
 .PHONY : src/sl_lidar_driver.cpp.o
 
@@ -716,7 +624,6 @@ src/sl_lidar_driver.i: src/sl_lidar_driver.cpp.i
 
 # target to preprocess a source file
 src/sl_lidar_driver.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_lidar_driver.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.i
 .PHONY : src/sl_lidar_driver.cpp.i
 
@@ -726,7 +633,6 @@ src/sl_lidar_driver.s: src/sl_lidar_driver.cpp.s
 
 # target to generate assembly for a file
 src/sl_lidar_driver.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_lidar_driver.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.s
 .PHONY : src/sl_lidar_driver.cpp.s
 
@@ -736,7 +642,6 @@ src/sl_lidarprotocol_codec.o: src/sl_lidarprotocol_codec.cpp.o
 
 # target to build an object file
 src/sl_lidarprotocol_codec.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_lidarprotocol_codec.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.o
 .PHONY : src/sl_lidarprotocol_codec.cpp.o
 
@@ -746,7 +651,6 @@ src/sl_lidarprotocol_codec.i: src/sl_lidarprotocol_codec.cpp.i
 
 # target to preprocess a source file
 src/sl_lidarprotocol_codec.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_lidarprotocol_codec.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.i
 .PHONY : src/sl_lidarprotocol_codec.cpp.i
 
@@ -756,7 +660,6 @@ src/sl_lidarprotocol_codec.s: src/sl_lidarprotocol_codec.cpp.s
 
 # target to generate assembly for a file
 src/sl_lidarprotocol_codec.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_lidarprotocol_codec.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.s
 .PHONY : src/sl_lidarprotocol_codec.cpp.s
 
@@ -766,7 +669,6 @@ src/sl_serial_channel.o: src/sl_serial_channel.cpp.o
 
 # target to build an object file
 src/sl_serial_channel.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_serial_channel.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.o
 .PHONY : src/sl_serial_channel.cpp.o
 
@@ -776,7 +678,6 @@ src/sl_serial_channel.i: src/sl_serial_channel.cpp.i
 
 # target to preprocess a source file
 src/sl_serial_channel.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_serial_channel.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.i
 .PHONY : src/sl_serial_channel.cpp.i
 
@@ -786,7 +687,6 @@ src/sl_serial_channel.s: src/sl_serial_channel.cpp.s
 
 # target to generate assembly for a file
 src/sl_serial_channel.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_serial_channel.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.s
 .PHONY : src/sl_serial_channel.cpp.s
 
@@ -796,7 +696,6 @@ src/sl_tcp_channel.o: src/sl_tcp_channel.cpp.o
 
 # target to build an object file
 src/sl_tcp_channel.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_tcp_channel.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.o
 .PHONY : src/sl_tcp_channel.cpp.o
 
@@ -806,7 +705,6 @@ src/sl_tcp_channel.i: src/sl_tcp_channel.cpp.i
 
 # target to preprocess a source file
 src/sl_tcp_channel.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_tcp_channel.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.i
 .PHONY : src/sl_tcp_channel.cpp.i
 
@@ -816,7 +714,6 @@ src/sl_tcp_channel.s: src/sl_tcp_channel.cpp.s
 
 # target to generate assembly for a file
 src/sl_tcp_channel.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_tcp_channel.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.s
 .PHONY : src/sl_tcp_channel.cpp.s
 
@@ -826,7 +723,6 @@ src/sl_udp_channel.o: src/sl_udp_channel.cpp.o
 
 # target to build an object file
 src/sl_udp_channel.cpp.o:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_udp_channel.cpp.o
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.o
 .PHONY : src/sl_udp_channel.cpp.o
 
@@ -836,7 +732,6 @@ src/sl_udp_channel.i: src/sl_udp_channel.cpp.i
 
 # target to preprocess a source file
 src/sl_udp_channel.cpp.i:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_udp_channel.cpp.i
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.i
 .PHONY : src/sl_udp_channel.cpp.i
 
@@ -846,7 +741,6 @@ src/sl_udp_channel.s: src/sl_udp_channel.cpp.s
 
 # target to generate assembly for a file
 src/sl_udp_channel.cpp.s:
-	$(MAKE) -f CMakeFiles/lidar_test.dir/build.make CMakeFiles/lidar_test.dir/src/sl_udp_channel.cpp.s
 	$(MAKE) -f CMakeFiles/torpedo_control.dir/build.make CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.s
 .PHONY : src/sl_udp_channel.cpp.s
 
@@ -858,7 +752,6 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... lidar_test"
 	@echo "... torpedo_control"
 	@echo "... src/ControlLogic.o"
 	@echo "... src/ControlLogic.i"
@@ -905,9 +798,6 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/main_lidar_algo_test.o"
-	@echo "... src/main_lidar_algo_test.i"
-	@echo "... src/main_lidar_algo_test.s"
 	@echo "... src/rplidar_driver.o"
 	@echo "... src/rplidar_driver.i"
 	@echo "... src/rplidar_driver.s"

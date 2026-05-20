@@ -1,4 +1,3 @@
-/home/user/torpedo_control_workspace/build/CMakeFiles/rebuild_cache.dir
-/home/user/torpedo_control_workspace/build/CMakeFiles/edit_cache.dir
-/home/user/torpedo_control_workspace/build/CMakeFiles/lidar_test.dir
-/home/user/torpedo_control_workspace/build/CMakeFiles/torpedo_control.dir
+/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles/rebuild_cache.dir
+/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles/edit_cache.dir
+/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles/torpedo_control.dir

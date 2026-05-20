@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/user/torpedo_control_workspace
+CMAKE_SOURCE_DIR = /home/user/Aqua-Vector-ControlCenter
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/user/torpedo_control_workspace/build
+CMAKE_BINARY_DIR = /home/user/Aqua-Vector-ControlCenter/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/torpedo_control.dir/depend.make
@@ -59,302 +59,302 @@ include CMakeFiles/torpedo_control.dir/flags.make
 
 CMakeFiles/torpedo_control.dir/src/main.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/torpedo_control.dir/src/main.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/main.cpp.o -c /home/user/torpedo_control_workspace/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/torpedo_control.dir/src/main.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/main.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/main.cpp
 
 CMakeFiles/torpedo_control.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/main.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/main.cpp > CMakeFiles/torpedo_control.dir/src/main.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/main.cpp > CMakeFiles/torpedo_control.dir/src/main.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/main.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/main.cpp -o CMakeFiles/torpedo_control.dir/src/main.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/main.cpp -o CMakeFiles/torpedo_control.dir/src/main.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.o: ../src/ControlLogic.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.o -c /home/user/torpedo_control_workspace/src/ControlLogic.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/ControlLogic.cpp
 
 CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/ControlLogic.cpp > CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/ControlLogic.cpp > CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/ControlLogic.cpp -o CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/ControlLogic.cpp -o CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.o: ../src/CrcCalculator.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.o -c /home/user/torpedo_control_workspace/src/CrcCalculator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/CrcCalculator.cpp
 
 CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/CrcCalculator.cpp > CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/CrcCalculator.cpp > CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/CrcCalculator.cpp -o CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/CrcCalculator.cpp -o CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.o: ../src/LidarNode.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.o -c /home/user/torpedo_control_workspace/src/LidarNode.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/LidarNode.cpp
 
 CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/LidarNode.cpp > CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/LidarNode.cpp > CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/LidarNode.cpp -o CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/LidarNode.cpp -o CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.o: ../src/NetworkNode.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.o -c /home/user/torpedo_control_workspace/src/NetworkNode.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/NetworkNode.cpp
 
 CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/NetworkNode.cpp > CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/NetworkNode.cpp > CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/NetworkNode.cpp -o CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/NetworkNode.cpp -o CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.o: ../src/ServoNode.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.o -c /home/user/torpedo_control_workspace/src/ServoNode.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/ServoNode.cpp
 
 CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/ServoNode.cpp > CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/ServoNode.cpp > CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/ServoNode.cpp -o CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/ServoNode.cpp -o CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/UartNode.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/UartNode.cpp.o: ../src/UartNode.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/torpedo_control.dir/src/UartNode.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/UartNode.cpp.o -c /home/user/torpedo_control_workspace/src/UartNode.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/torpedo_control.dir/src/UartNode.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/UartNode.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/UartNode.cpp
 
 CMakeFiles/torpedo_control.dir/src/UartNode.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/UartNode.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/UartNode.cpp > CMakeFiles/torpedo_control.dir/src/UartNode.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/UartNode.cpp > CMakeFiles/torpedo_control.dir/src/UartNode.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/UartNode.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/UartNode.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/UartNode.cpp -o CMakeFiles/torpedo_control.dir/src/UartNode.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/UartNode.cpp -o CMakeFiles/torpedo_control.dir/src/UartNode.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.o: ../src/arch/linux/net_serial.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.o -c /home/user/torpedo_control_workspace/src/arch/linux/net_serial.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/arch/linux/net_serial.cpp
 
 CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/arch/linux/net_serial.cpp > CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/arch/linux/net_serial.cpp > CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/arch/linux/net_serial.cpp -o CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/arch/linux/net_serial.cpp -o CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.o: ../src/arch/linux/net_socket.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.o -c /home/user/torpedo_control_workspace/src/arch/linux/net_socket.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/arch/linux/net_socket.cpp
 
 CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/arch/linux/net_socket.cpp > CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/arch/linux/net_socket.cpp > CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/arch/linux/net_socket.cpp -o CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/arch/linux/net_socket.cpp -o CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.o: ../src/arch/linux/timer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.o -c /home/user/torpedo_control_workspace/src/arch/linux/timer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/arch/linux/timer.cpp
 
 CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/arch/linux/timer.cpp > CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/arch/linux/timer.cpp > CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/arch/linux/timer.cpp -o CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/arch/linux/timer.cpp -o CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.o: ../src/dataunpacker/dataunpacker.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.o -c /home/user/torpedo_control_workspace/src/dataunpacker/dataunpacker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunpacker.cpp
 
 CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/dataunpacker/dataunpacker.cpp > CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunpacker.cpp > CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/dataunpacker/dataunpacker.cpp -o CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunpacker.cpp -o CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.o: ../src/dataunpacker/unpacker/handler_capsules.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.o -c /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_capsules.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_capsules.cpp
 
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_capsules.cpp > CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_capsules.cpp > CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_capsules.cpp -o CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_capsules.cpp -o CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.o: ../src/dataunpacker/unpacker/handler_hqnode.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.o -c /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_hqnode.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_hqnode.cpp
 
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_hqnode.cpp > CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_hqnode.cpp > CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_hqnode.cpp -o CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_hqnode.cpp -o CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.o: ../src/dataunpacker/unpacker/handler_normalnode.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.o -c /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_normalnode.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_normalnode.cpp
 
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_normalnode.cpp > CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_normalnode.cpp > CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_normalnode.cpp -o CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_normalnode.cpp -o CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.o: ../src/hal/thread.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.o -c /home/user/torpedo_control_workspace/src/hal/thread.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/hal/thread.cpp
 
 CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/hal/thread.cpp > CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/hal/thread.cpp > CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/hal/thread.cpp -o CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/hal/thread.cpp -o CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.o: ../src/rplidar_driver.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.o -c /home/user/torpedo_control_workspace/src/rplidar_driver.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/rplidar_driver.cpp
 
 CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/rplidar_driver.cpp > CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/rplidar_driver.cpp > CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/rplidar_driver.cpp -o CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/rplidar_driver.cpp -o CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.o: ../src/sl_async_transceiver.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.o -c /home/user/torpedo_control_workspace/src/sl_async_transceiver.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/sl_async_transceiver.cpp
 
 CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/sl_async_transceiver.cpp > CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/sl_async_transceiver.cpp > CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/sl_async_transceiver.cpp -o CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/sl_async_transceiver.cpp -o CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.o: ../src/sl_crc.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.o -c /home/user/torpedo_control_workspace/src/sl_crc.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/sl_crc.cpp
 
 CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/sl_crc.cpp > CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/sl_crc.cpp > CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/sl_crc.cpp -o CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/sl_crc.cpp -o CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.o: ../src/sl_lidar_driver.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.o -c /home/user/torpedo_control_workspace/src/sl_lidar_driver.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/sl_lidar_driver.cpp
 
 CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/sl_lidar_driver.cpp > CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/sl_lidar_driver.cpp > CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/sl_lidar_driver.cpp -o CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/sl_lidar_driver.cpp -o CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.o: ../src/sl_lidarprotocol_codec.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.o -c /home/user/torpedo_control_workspace/src/sl_lidarprotocol_codec.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/sl_lidarprotocol_codec.cpp
 
 CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/sl_lidarprotocol_codec.cpp > CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/sl_lidarprotocol_codec.cpp > CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/sl_lidarprotocol_codec.cpp -o CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/sl_lidarprotocol_codec.cpp -o CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.o: ../src/sl_serial_channel.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.o -c /home/user/torpedo_control_workspace/src/sl_serial_channel.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/sl_serial_channel.cpp
 
 CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/sl_serial_channel.cpp > CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/sl_serial_channel.cpp > CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/sl_serial_channel.cpp -o CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/sl_serial_channel.cpp -o CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.o: ../src/sl_tcp_channel.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.o -c /home/user/torpedo_control_workspace/src/sl_tcp_channel.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/sl_tcp_channel.cpp
 
 CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/sl_tcp_channel.cpp > CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/sl_tcp_channel.cpp > CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/sl_tcp_channel.cpp -o CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/sl_tcp_channel.cpp -o CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.s
 
 CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.o: CMakeFiles/torpedo_control.dir/flags.make
 CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.o: ../src/sl_udp_channel.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.o"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.o -c /home/user/torpedo_control_workspace/src/sl_udp_channel.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.o"
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.o -c /home/user/Aqua-Vector-ControlCenter/src/sl_udp_channel.cpp
 
 CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.i"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/torpedo_control_workspace/src/sl_udp_channel.cpp > CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.i
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/Aqua-Vector-ControlCenter/src/sl_udp_channel.cpp > CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.i
 
 CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.s"
-	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/torpedo_control_workspace/src/sl_udp_channel.cpp -o CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.s
+	/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/Aqua-Vector-ControlCenter/src/sl_udp_channel.cpp -o CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.s
 
 # Object files for target torpedo_control
 torpedo_control_OBJECTS = \
@@ -410,7 +410,7 @@ torpedo_control: CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.o
 torpedo_control: CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.o
 torpedo_control: CMakeFiles/torpedo_control.dir/build.make
 torpedo_control: CMakeFiles/torpedo_control.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/user/torpedo_control_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX executable torpedo_control"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/user/Aqua-Vector-ControlCenter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX executable torpedo_control"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/torpedo_control.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -423,6 +423,6 @@ CMakeFiles/torpedo_control.dir/clean:
 .PHONY : CMakeFiles/torpedo_control.dir/clean
 
 CMakeFiles/torpedo_control.dir/depend:
-	cd /home/user/torpedo_control_workspace/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/user/torpedo_control_workspace /home/user/torpedo_control_workspace /home/user/torpedo_control_workspace/build /home/user/torpedo_control_workspace/build /home/user/torpedo_control_workspace/build/CMakeFiles/torpedo_control.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/user/Aqua-Vector-ControlCenter/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/user/Aqua-Vector-ControlCenter /home/user/Aqua-Vector-ControlCenter /home/user/Aqua-Vector-ControlCenter/build /home/user/Aqua-Vector-ControlCenter/build /home/user/Aqua-Vector-ControlCenter/build/CMakeFiles/torpedo_control.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/torpedo_control.dir/depend
 

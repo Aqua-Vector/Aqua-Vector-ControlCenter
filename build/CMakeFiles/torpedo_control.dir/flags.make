@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=gnu++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/user/torpedo_control_workspace/include -I/home/user/torpedo_control_workspace/include/torpedo -I/home/user/torpedo_control_workspace/src 
+CXX_INCLUDES = -I/home/user/Aqua-Vector-ControlCenter/include -I/home/user/Aqua-Vector-ControlCenter/include/torpedo -I/home/user/Aqua-Vector-ControlCenter/src 
 

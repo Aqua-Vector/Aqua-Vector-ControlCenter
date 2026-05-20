@@ -17,6 +17,3 @@ list(REMOVE_ITEM ALL_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/main_lidar_algo_te
 add_executable(torpedo_control src/main.cpp ${ALL_SOURCES})
 target_link_libraries(torpedo_control pthread rt)  # ← 변경 없음, 소켓은 Linux에 내장
 
-# --- [빌드 2] 라이다 알고리즘 단독 테스트 ---
-add_executable(lidar_test src/main_lidar_algo_test.cpp ${ALL_SOURCES})
-target_link_libraries(lidar_test pthread rt)

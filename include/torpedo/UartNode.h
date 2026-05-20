@@ -6,28 +6,45 @@
 #include "DataTypes.h"
 #include "Protocol.h"
 
+// ═══════════════════════════════════════════════
+// UART 시리얼 통신 클래스
+// 어뢰 통신(Downlink/Uplink) 및 GUI 통신 담당
+// ═══════════════════════════════════════════════
 class UartNode {
 private:
-    int fd;
+    int fd;  // 파일 디스크립터 (시리얼 포트)
+
 public:
+    // ═══════════════════════════════════════════════
+    // 생성자: 시리얼 포트 열기 및 설정
+    // @param port: 디바이스 경로 (예: /dev/ttyPS0)
+    // @param baudrate: 통신 속도 (예: 115200)
+    // ═══════════════════════════════════════════════
     UartNode(const char* port, int baudrate);
+    
+    // ═══════════════════════════════════════════════
+    // 소멸자: 포트 닫기
+    // ═══════════════════════════════════════════════
     ~UartNode();
 
-    // 통제소 -> 어뢰
-    void sendDownlink(float target_x, float target_y,
-                      float torpedo_x, float torpedo_y,
-                      uint32_t timestamp_us, uint16_t seq);
+    // ═══════════════════════════════════════════════
+    // 통제소 → 어뢰 Downlink 전송
+    // @param target_x/y: 목표물 좌표 (m)
+    // @param torpedo_x/y: 어뢰 현재 위치 (m, 라이다 추적)
+    // @param timestamp_us: 타임스탬프 (마이크로초)
+    // @param seq: 시퀀스 번호
+    // ═══════════════════════════════════════════════
+    void sendDownlink(float target_x, float target_y, 
+                      float torpedo_x, float torpedo_y, 
+                      int16_t steer, uint8_t flags, uint16_t seq);
 
-    // 어뢰 -> 통제소
     bool receiveUplinkStatus(UplinkPacket& pkt);
 
-    // 통제소 -> GUI (라이다 클러스터 + 어뢰 위치)
     void sendGuiPacket(float torpedo_x, float torpedo_y,
-                   float yaw,                              // ← 추가
-                   const std::vector<std::vector<PointGrid>>& clusters,
-                   uint16_t seq);
+                       float yaw,
+                       const std::vector<std::vector<PointGrid>>& clusters,
+                       uint16_t seq);
 
-    // GUI -> 통제소 명령 수신
     bool receiveGuiCommand(GuiCommandPacket& pkt);
 };
 

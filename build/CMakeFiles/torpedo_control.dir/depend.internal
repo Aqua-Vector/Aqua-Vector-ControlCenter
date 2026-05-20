@@ -4,10 +4,10 @@
 CMakeFiles/torpedo_control.dir/src/ControlLogic.cpp.o
  ../include/torpedo/ControlLogic.h
  ../include/torpedo/DataTypes.h
- /home/user/torpedo_control_workspace/src/ControlLogic.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/ControlLogic.cpp
 CMakeFiles/torpedo_control.dir/src/CrcCalculator.cpp.o
  ../include/torpedo/CrcCalculator.h
- /home/user/torpedo_control_workspace/src/CrcCalculator.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/CrcCalculator.cpp
 CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.o
  ../include/sl_lidar.h
  ../include/sl_lidar_cmd.h
@@ -16,27 +16,27 @@ CMakeFiles/torpedo_control.dir/src/LidarNode.cpp.o
  ../include/sl_types.h
  ../include/torpedo/DataTypes.h
  ../include/torpedo/LidarNode.h
- /home/user/torpedo_control_workspace/src/LidarNode.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/LidarNode.cpp
 CMakeFiles/torpedo_control.dir/src/NetworkNode.cpp.o
  ../include/torpedo/DataTypes.h
  ../include/torpedo/NetworkNode.h
  ../include/torpedo/Protocol.h
- /home/user/torpedo_control_workspace/src/NetworkNode.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/NetworkNode.cpp
 CMakeFiles/torpedo_control.dir/src/ServoNode.cpp.o
  ../include/torpedo/ServoNode.h
- /home/user/torpedo_control_workspace/src/ServoNode.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/ServoNode.cpp
 CMakeFiles/torpedo_control.dir/src/UartNode.cpp.o
  ../include/torpedo/DataTypes.h
  ../include/torpedo/Protocol.h
  ../include/torpedo/UartNode.h
- /home/user/torpedo_control_workspace/src/UartNode.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/UartNode.cpp
 CMakeFiles/torpedo_control.dir/src/arch/linux/net_serial.cpp.o
  ../src/arch/linux/arch_linux.h
  ../src/arch/linux/net_serial.h
  ../src/arch/linux/timer.h
  ../src/hal/abs_rxtx.h
  ../src/hal/types.h
- /home/user/torpedo_control_workspace/src/arch/linux/net_serial.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/arch/linux/net_serial.cpp
 CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.o
  ../include/rplidar.h
  ../include/rplidar_cmd.h
@@ -52,13 +52,13 @@ CMakeFiles/torpedo_control.dir/src/arch/linux/net_socket.cpp.o
  ../src/hal/types.h
  ../src/hal/util.h
  ../src/sdkcommon.h
- /home/user/torpedo_control_workspace/src/arch/linux/net_socket.cpp
- /home/user/torpedo_control_workspace/src/hal/socket.h
+ /home/user/Aqua-Vector-ControlCenter/src/arch/linux/net_socket.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/hal/socket.h
 CMakeFiles/torpedo_control.dir/src/arch/linux/timer.cpp.o
  ../src/arch/linux/arch_linux.h
  ../src/arch/linux/timer.h
  ../src/hal/types.h
- /home/user/torpedo_control_workspace/src/arch/linux/timer.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/arch/linux/timer.cpp
 CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.o
  ../include/rplidar.h
  ../include/rplidar_cmd.h
@@ -83,14 +83,14 @@ CMakeFiles/torpedo_control.dir/src/dataunpacker/dataunpacker.cpp.o
  ../src/hal/util.h
  ../src/hal/waiter.h
  ../src/sdkcommon.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataunnpacker_commondef.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataunnpacker_internal.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataunpacker.cpp
- /home/user/torpedo_control_workspace/src/dataunpacker/dataunpacker.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataupacker_namespace.h
- /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_capsules.h
- /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_hqnode.h
- /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_normalnode.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunnpacker_commondef.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunnpacker_internal.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunpacker.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunpacker.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataupacker_namespace.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_capsules.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_hqnode.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_normalnode.h
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.o
  ../include/rplidar.h
  ../include/rplidar_cmd.h
@@ -115,12 +115,12 @@ CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_capsules.cpp.o
  ../src/hal/util.h
  ../src/hal/waiter.h
  ../src/sdkcommon.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataunnpacker_commondef.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataunnpacker_internal.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataunpacker.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataupacker_namespace.h
- /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_capsules.cpp
- /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_capsules.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunnpacker_commondef.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunnpacker_internal.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunpacker.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataupacker_namespace.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_capsules.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_capsules.h
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.o
  ../include/rplidar.h
  ../include/rplidar_cmd.h
@@ -145,12 +145,12 @@ CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_hqnode.cpp.o
  ../src/hal/util.h
  ../src/hal/waiter.h
  ../src/sdkcommon.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataunnpacker_commondef.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataunnpacker_internal.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataunpacker.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataupacker_namespace.h
- /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_hqnode.cpp
- /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_hqnode.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunnpacker_commondef.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunnpacker_internal.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunpacker.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataupacker_namespace.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_hqnode.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_hqnode.h
 CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.o
  ../include/rplidar.h
  ../include/rplidar_cmd.h
@@ -175,12 +175,12 @@ CMakeFiles/torpedo_control.dir/src/dataunpacker/unpacker/handler_normalnode.cpp.
  ../src/hal/util.h
  ../src/hal/waiter.h
  ../src/sdkcommon.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataunnpacker_commondef.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataunnpacker_internal.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataunpacker.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataupacker_namespace.h
- /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_normalnode.cpp
- /home/user/torpedo_control_workspace/src/dataunpacker/unpacker/handler_normalnode.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunnpacker_commondef.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunnpacker_internal.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunpacker.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataupacker_namespace.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_normalnode.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/unpacker/handler_normalnode.h
 CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.o
  ../include/rplidar.h
  ../include/rplidar_cmd.h
@@ -198,21 +198,22 @@ CMakeFiles/torpedo_control.dir/src/hal/thread.cpp.o
  ../src/hal/types.h
  ../src/hal/util.h
  ../src/sdkcommon.h
- /home/user/torpedo_control_workspace/src/hal/thread.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/hal/thread.cpp
 CMakeFiles/torpedo_control.dir/src/main.cpp.o
  ../include/sl_lidar.h
  ../include/sl_lidar_cmd.h
  ../include/sl_lidar_driver.h
  ../include/sl_lidar_protocol.h
  ../include/sl_types.h
- ../include/torpedo/ControlLogic.h
+ ../include/torpedo/AStarPlanner.h
  ../include/torpedo/DataTypes.h
+ ../include/torpedo/LatencyAwareCtrl.h
  ../include/torpedo/LidarNode.h
  ../include/torpedo/NetworkNode.h
  ../include/torpedo/Protocol.h
  ../include/torpedo/ServoNode.h
  ../include/torpedo/UartNode.h
- /home/user/torpedo_control_workspace/src/main.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/main.cpp
 CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.o
  ../include/rplidar.h
  ../include/rplidar_cmd.h
@@ -223,18 +224,18 @@ CMakeFiles/torpedo_control.dir/src/rplidar_driver.cpp.o
  ../include/sl_lidar_driver.h
  ../include/sl_lidar_protocol.h
  ../include/sl_types.h
- /home/user/torpedo_control_workspace/src/arch/linux/arch_linux.h
- /home/user/torpedo_control_workspace/src/arch/linux/timer.h
- /home/user/torpedo_control_workspace/src/hal/abs_rxtx.h
- /home/user/torpedo_control_workspace/src/hal/assert.h
- /home/user/torpedo_control_workspace/src/hal/event.h
- /home/user/torpedo_control_workspace/src/hal/locker.h
- /home/user/torpedo_control_workspace/src/hal/socket.h
- /home/user/torpedo_control_workspace/src/hal/thread.h
- /home/user/torpedo_control_workspace/src/hal/types.h
- /home/user/torpedo_control_workspace/src/hal/util.h
- /home/user/torpedo_control_workspace/src/rplidar_driver.cpp
- /home/user/torpedo_control_workspace/src/sdkcommon.h
+ /home/user/Aqua-Vector-ControlCenter/src/arch/linux/arch_linux.h
+ /home/user/Aqua-Vector-ControlCenter/src/arch/linux/timer.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/abs_rxtx.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/assert.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/event.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/locker.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/socket.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/thread.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/types.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/util.h
+ /home/user/Aqua-Vector-ControlCenter/src/rplidar_driver.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/sdkcommon.h
 CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.o
  ../include/rplidar.h
  ../include/rplidar_cmd.h
@@ -244,25 +245,25 @@ CMakeFiles/torpedo_control.dir/src/sl_async_transceiver.cpp.o
  ../include/sl_lidar_driver.h
  ../include/sl_lidar_protocol.h
  ../include/sl_types.h
- /home/user/torpedo_control_workspace/src/arch/linux/arch_linux.h
- /home/user/torpedo_control_workspace/src/arch/linux/timer.h
- /home/user/torpedo_control_workspace/src/hal/abs_rxtx.h
- /home/user/torpedo_control_workspace/src/hal/assert.h
- /home/user/torpedo_control_workspace/src/hal/event.h
- /home/user/torpedo_control_workspace/src/hal/locker.h
- /home/user/torpedo_control_workspace/src/hal/socket.h
- /home/user/torpedo_control_workspace/src/hal/thread.h
- /home/user/torpedo_control_workspace/src/hal/types.h
- /home/user/torpedo_control_workspace/src/hal/util.h
- /home/user/torpedo_control_workspace/src/sdkcommon.h
- /home/user/torpedo_control_workspace/src/sl_async_transceiver.cpp
- /home/user/torpedo_control_workspace/src/sl_async_transceiver.h
+ /home/user/Aqua-Vector-ControlCenter/src/arch/linux/arch_linux.h
+ /home/user/Aqua-Vector-ControlCenter/src/arch/linux/timer.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/abs_rxtx.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/assert.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/event.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/locker.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/socket.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/thread.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/types.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/util.h
+ /home/user/Aqua-Vector-ControlCenter/src/sdkcommon.h
+ /home/user/Aqua-Vector-ControlCenter/src/sl_async_transceiver.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/sl_async_transceiver.h
 CMakeFiles/torpedo_control.dir/src/sl_crc.cpp.o
  ../include/sl_crc.h
  ../include/sl_lidar_cmd.h
  ../include/sl_lidar_protocol.h
  ../include/sl_types.h
- /home/user/torpedo_control_workspace/src/sl_crc.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/sl_crc.cpp
 CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.o
  ../include/rplidar.h
  ../include/rplidar_cmd.h
@@ -274,24 +275,24 @@ CMakeFiles/torpedo_control.dir/src/sl_lidar_driver.cpp.o
  ../include/sl_lidar_protocol.h
  ../include/sl_types.h
  ../src/hal/byteops.h
- /home/user/torpedo_control_workspace/src/arch/linux/arch_linux.h
- /home/user/torpedo_control_workspace/src/arch/linux/timer.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataunpacker.h
- /home/user/torpedo_control_workspace/src/dataunpacker/dataupacker_namespace.h
- /home/user/torpedo_control_workspace/src/hal/abs_rxtx.h
- /home/user/torpedo_control_workspace/src/hal/assert.h
- /home/user/torpedo_control_workspace/src/hal/byteorder.h
- /home/user/torpedo_control_workspace/src/hal/event.h
- /home/user/torpedo_control_workspace/src/hal/locker.h
- /home/user/torpedo_control_workspace/src/hal/socket.h
- /home/user/torpedo_control_workspace/src/hal/thread.h
- /home/user/torpedo_control_workspace/src/hal/types.h
- /home/user/torpedo_control_workspace/src/hal/util.h
- /home/user/torpedo_control_workspace/src/hal/waiter.h
- /home/user/torpedo_control_workspace/src/sdkcommon.h
- /home/user/torpedo_control_workspace/src/sl_async_transceiver.h
- /home/user/torpedo_control_workspace/src/sl_lidar_driver.cpp
- /home/user/torpedo_control_workspace/src/sl_lidarprotocol_codec.h
+ /home/user/Aqua-Vector-ControlCenter/src/arch/linux/arch_linux.h
+ /home/user/Aqua-Vector-ControlCenter/src/arch/linux/timer.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataunpacker.h
+ /home/user/Aqua-Vector-ControlCenter/src/dataunpacker/dataupacker_namespace.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/abs_rxtx.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/assert.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/byteorder.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/event.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/locker.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/socket.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/thread.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/types.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/util.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/waiter.h
+ /home/user/Aqua-Vector-ControlCenter/src/sdkcommon.h
+ /home/user/Aqua-Vector-ControlCenter/src/sl_async_transceiver.h
+ /home/user/Aqua-Vector-ControlCenter/src/sl_lidar_driver.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/sl_lidarprotocol_codec.h
 CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.o
  ../include/rplidar.h
  ../include/rplidar_cmd.h
@@ -303,45 +304,45 @@ CMakeFiles/torpedo_control.dir/src/sl_lidarprotocol_codec.cpp.o
  ../include/sl_lidar_protocol.h
  ../include/sl_types.h
  ../src/hal/byteops.h
- /home/user/torpedo_control_workspace/src/arch/linux/arch_linux.h
- /home/user/torpedo_control_workspace/src/arch/linux/timer.h
- /home/user/torpedo_control_workspace/src/hal/abs_rxtx.h
- /home/user/torpedo_control_workspace/src/hal/assert.h
- /home/user/torpedo_control_workspace/src/hal/byteorder.h
- /home/user/torpedo_control_workspace/src/hal/event.h
- /home/user/torpedo_control_workspace/src/hal/locker.h
- /home/user/torpedo_control_workspace/src/hal/socket.h
- /home/user/torpedo_control_workspace/src/hal/thread.h
- /home/user/torpedo_control_workspace/src/hal/types.h
- /home/user/torpedo_control_workspace/src/hal/util.h
- /home/user/torpedo_control_workspace/src/sdkcommon.h
- /home/user/torpedo_control_workspace/src/sl_async_transceiver.h
- /home/user/torpedo_control_workspace/src/sl_lidarprotocol_codec.cpp
- /home/user/torpedo_control_workspace/src/sl_lidarprotocol_codec.h
+ /home/user/Aqua-Vector-ControlCenter/src/arch/linux/arch_linux.h
+ /home/user/Aqua-Vector-ControlCenter/src/arch/linux/timer.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/abs_rxtx.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/assert.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/byteorder.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/event.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/locker.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/socket.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/thread.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/types.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/util.h
+ /home/user/Aqua-Vector-ControlCenter/src/sdkcommon.h
+ /home/user/Aqua-Vector-ControlCenter/src/sl_async_transceiver.h
+ /home/user/Aqua-Vector-ControlCenter/src/sl_lidarprotocol_codec.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/sl_lidarprotocol_codec.h
 CMakeFiles/torpedo_control.dir/src/sl_serial_channel.cpp.o
  ../include/sl_lidar_cmd.h
  ../include/sl_lidar_driver.h
  ../include/sl_lidar_protocol.h
  ../include/sl_types.h
  ../src/hal/types.h
- /home/user/torpedo_control_workspace/src/hal/abs_rxtx.h
- /home/user/torpedo_control_workspace/src/hal/socket.h
- /home/user/torpedo_control_workspace/src/sl_serial_channel.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/hal/abs_rxtx.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/socket.h
+ /home/user/Aqua-Vector-ControlCenter/src/sl_serial_channel.cpp
 CMakeFiles/torpedo_control.dir/src/sl_tcp_channel.cpp.o
  ../include/sl_lidar_cmd.h
  ../include/sl_lidar_driver.h
  ../include/sl_lidar_protocol.h
  ../include/sl_types.h
  ../src/hal/types.h
- /home/user/torpedo_control_workspace/src/hal/abs_rxtx.h
- /home/user/torpedo_control_workspace/src/hal/socket.h
- /home/user/torpedo_control_workspace/src/sl_tcp_channel.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/hal/abs_rxtx.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/socket.h
+ /home/user/Aqua-Vector-ControlCenter/src/sl_tcp_channel.cpp
 CMakeFiles/torpedo_control.dir/src/sl_udp_channel.cpp.o
  ../include/sl_lidar_cmd.h
  ../include/sl_lidar_driver.h
  ../include/sl_lidar_protocol.h
  ../include/sl_types.h
  ../src/hal/types.h
- /home/user/torpedo_control_workspace/src/hal/abs_rxtx.h
- /home/user/torpedo_control_workspace/src/hal/socket.h
- /home/user/torpedo_control_workspace/src/sl_udp_channel.cpp
+ /home/user/Aqua-Vector-ControlCenter/src/hal/abs_rxtx.h
+ /home/user/Aqua-Vector-ControlCenter/src/hal/socket.h
+ /home/user/Aqua-Vector-ControlCenter/src/sl_udp_channel.cpp

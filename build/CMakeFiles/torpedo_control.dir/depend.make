@@ -204,8 +204,9 @@ CMakeFiles/torpedo_control.dir/src/main.cpp.o: ../include/sl_lidar_cmd.h
 CMakeFiles/torpedo_control.dir/src/main.cpp.o: ../include/sl_lidar_driver.h
 CMakeFiles/torpedo_control.dir/src/main.cpp.o: ../include/sl_lidar_protocol.h
 CMakeFiles/torpedo_control.dir/src/main.cpp.o: ../include/sl_types.h
-CMakeFiles/torpedo_control.dir/src/main.cpp.o: ../include/torpedo/ControlLogic.h
+CMakeFiles/torpedo_control.dir/src/main.cpp.o: ../include/torpedo/AStarPlanner.h
 CMakeFiles/torpedo_control.dir/src/main.cpp.o: ../include/torpedo/DataTypes.h
+CMakeFiles/torpedo_control.dir/src/main.cpp.o: ../include/torpedo/LatencyAwareCtrl.h
 CMakeFiles/torpedo_control.dir/src/main.cpp.o: ../include/torpedo/LidarNode.h
 CMakeFiles/torpedo_control.dir/src/main.cpp.o: ../include/torpedo/NetworkNode.h
 CMakeFiles/torpedo_control.dir/src/main.cpp.o: ../include/torpedo/Protocol.h
