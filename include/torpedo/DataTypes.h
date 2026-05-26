@@ -2,6 +2,7 @@
 #define DATATYPES_H
 
 #include <cmath>
+#include <cstdint> // uint32_t, uint8_t 사용을 위해 추가
 
 /**
  * @brief 2D 공간상의 좌표를 나타내는 표준 구조체
@@ -40,6 +41,8 @@ struct TorpedoPose {
     float heading;       // 현재 헤딩 각도 [degree] -> 단, 제어기 내부 연산 시 필요에 따라 라디안 변환 사용
     float angular_vel;   // 각속도 [rad/s]
     float latency_comp;  // 지연 보상값 또는 제어 입력 가중치
+    uint32_t seq;        // 수신 패킷 시퀀스 번호
+    uint8_t flags;       // 수신 상태 플래그
 };
 
 #endif // DATATYPES_H

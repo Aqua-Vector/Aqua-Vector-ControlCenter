@@ -1,7 +1,7 @@
-set(CMAKE_C_COMPILER "/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-gcc")
+set(CMAKE_C_COMPILER "/usr/bin/arm-linux-gnueabihf-gcc")
 set(CMAKE_C_COMPILER_ARG1 "")
 set(CMAKE_C_COMPILER_ID "GNU")
-set(CMAKE_C_COMPILER_VERSION "11.2.0")
+set(CMAKE_C_COMPILER_VERSION "9.4.0")
 set(CMAKE_C_COMPILER_VERSION_INTERNAL "")
 set(CMAKE_C_COMPILER_WRAPPER "")
 set(CMAKE_C_STANDARD_COMPUTED_DEFAULT "11")
@@ -17,11 +17,11 @@ set(CMAKE_C_SIMULATE_VERSION "")
 
 
 
-set(CMAKE_AR "/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-ar")
-set(CMAKE_C_COMPILER_AR "/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-gcc-ar")
-set(CMAKE_RANLIB "/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-ranlib")
-set(CMAKE_C_COMPILER_RANLIB "/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-gcc-ranlib")
-set(CMAKE_LINKER "/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/arm-linux-gnueabihf-ld")
+set(CMAKE_AR "/usr/bin/arm-linux-gnueabihf-ar")
+set(CMAKE_C_COMPILER_AR "/usr/bin/arm-linux-gnueabihf-gcc-ar-9")
+set(CMAKE_RANLIB "/usr/bin/arm-linux-gnueabihf-ranlib")
+set(CMAKE_C_COMPILER_RANLIB "/usr/bin/arm-linux-gnueabihf-gcc-ranlib-9")
+set(CMAKE_LINKER "/usr/bin/arm-linux-gnueabihf-ld")
 set(CMAKE_MT "")
 set(CMAKE_COMPILER_IS_GNUCC 1)
 set(CMAKE_C_COMPILER_LOADED 1)
@@ -47,7 +47,7 @@ set(CMAKE_C_LINKER_PREFERENCE 10)
 # Save compiler ABI information.
 set(CMAKE_C_SIZEOF_DATA_PTR "4")
 set(CMAKE_C_COMPILER_ABI "ELF")
-set(CMAKE_C_LIBRARY_ARCHITECTURE "")
+set(CMAKE_C_LIBRARY_ARCHITECTURE "arm-linux-gnueabihf")
 
 if(CMAKE_C_SIZEOF_DATA_PTR)
   set(CMAKE_SIZEOF_VOID_P "${CMAKE_C_SIZEOF_DATA_PTR}")
@@ -58,7 +58,7 @@ if(CMAKE_C_COMPILER_ABI)
 endif()
 
 if(CMAKE_C_LIBRARY_ARCHITECTURE)
-  set(CMAKE_LIBRARY_ARCHITECTURE "")
+  set(CMAKE_LIBRARY_ARCHITECTURE "arm-linux-gnueabihf")
 endif()
 
 set(CMAKE_C_CL_SHOWINCLUDES_PREFIX "")
@@ -70,7 +70,7 @@ endif()
 
 
 
-set(CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES "/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/x86_64-petalinux-linux/usr/lib/arm-xilinx-linux-gnueabi/gcc/arm-xilinx-linux-gnueabi/11.2.0/include;/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/x86_64-petalinux-linux/usr/lib/arm-xilinx-linux-gnueabi/gcc/arm-xilinx-linux-gnueabi/11.2.0/include-fixed;/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include")
+set(CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES "/usr/lib/gcc-cross/arm-linux-gnueabihf/9/include;/usr/arm-linux-gnueabihf/include;/usr/include")
 set(CMAKE_C_IMPLICIT_LINK_LIBRARIES "gcc;gcc_s;c;gcc;gcc_s")
-set(CMAKE_C_IMPLICIT_LINK_DIRECTORIES "/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/x86_64-petalinux-linux/usr/lib/arm-xilinx-linux-gnueabi/gcc/arm-xilinx-linux-gnueabi/11.2.0;/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/x86_64-petalinux-linux/usr/lib/arm-xilinx-linux-gnueabi/gcc;/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/cortexa9t2hf-neon-xilinx-linux-gnueabi/lib;/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/lib/arm-xilinx-linux-gnueabi/11.2.0;/tools/Xilinx/Vitis/2022.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/lib")
+set(CMAKE_C_IMPLICIT_LINK_DIRECTORIES "/usr/lib/gcc-cross/arm-linux-gnueabihf/9;/usr/arm-linux-gnueabihf/lib;/lib/arm-linux-gnueabihf;/lib;/usr/lib/arm-linux-gnueabihf;/usr/lib")
 set(CMAKE_C_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES "")

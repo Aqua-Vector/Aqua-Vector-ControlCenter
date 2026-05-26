@@ -141,7 +141,7 @@ void NetworkNode::sendGuiPacketUDP(float torpedo_x, float torpedo_y,
         Protocol::packU16(buf, (uint16_t)cluster.size());
         for (const auto& pg : cluster) {
             Protocol::packFloat(buf, pg.x);
-            Protocol::packFloat(buf, pg.y);
+                        Protocol::packFloat(buf, pg.y);
         }
     }
 
@@ -232,7 +232,7 @@ bool NetworkNode::receiveCommandTCP(GuiCommandPacket& pkt) {
     // ─────────────────────────────────────────
     // 3. Type별 페이로드 읽기
     // ─────────────────────────────────────────
-    if (pkt.type == PKT_TYPE_TARGET) {
+    if (pkt.type == CMD_TARGET) {
         // 목표물 좌표: target_x(4) + target_y(4) + crc(2)
         uint8_t payload[10];
         if (recv(tcp_client_fd, payload, 10, 0) != 10) return false;
@@ -263,7 +263,7 @@ bool NetworkNode::receiveCommandTCP(GuiCommandPacket& pkt) {
     full_pkt[pkt_len++] = (pkt.seq >> 8) & 0xFF;
     full_pkt[pkt_len++] = pkt.type;
     
-    if (pkt.type == PKT_TYPE_TARGET) {
+    if (pkt.type == CMD_TARGET) {
         memcpy(full_pkt + pkt_len, &pkt.target_x, 4); pkt_len += 4;
         memcpy(full_pkt + pkt_len, &pkt.target_y, 4); pkt_len += 4;
     } else {

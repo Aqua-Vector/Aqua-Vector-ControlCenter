@@ -37,7 +37,7 @@ public:
     void sendDownlink(float target_x, float target_y, 
                       float torpedo_x, float torpedo_y, 
                       int16_t steer, uint8_t flags, uint16_t seq);
-
+    
     bool receiveUplinkStatus(UplinkPacket& pkt);
 
     void sendGuiPacket(float torpedo_x, float torpedo_y,

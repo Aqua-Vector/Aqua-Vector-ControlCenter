@@ -7,7 +7,6 @@
 #include <mutex>
 #include "DataTypes.h"
 
-
 /**
  * @brief A* 플래너 내부에서 사용하는 독립적 웨이포인트 구조체
  * @note 미터(m) 단위를 표준으로 사용합니다.
@@ -15,9 +14,9 @@
 
 class AStarPlanner {
 private:
-    std::vector<Waypoint> path;
-    mutable std::mutex    path_mtx;
-    std::atomic<bool>     is_path_valid{false};
+    std::vector<Waypoint> path; // 변수명을 path로 통일
+    mutable std::mutex path_mtx; // const 함수 내에서 lock을 걸기 위해 mutable 추가
+    std::atomic<bool> is_path_valid{false};
     
     float latency_sec;    // 초 단위 제어 지연 시간 (예: 80ms -> 0.08f)
     float base_velocity;  // 기본 구동 속도 (m/s)

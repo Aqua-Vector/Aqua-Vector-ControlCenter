@@ -55,7 +55,7 @@ struct GuiCommandPacket {
 };
 
 // =============================================================
-// 3. 통제소 -> 어뢰 Downlink 패킷 (지연 보상 및 조향 포함 v2) - 총 27바이트
+// 3. 통제소 -> 어뢰 Downlink 패킷 (지연 보상 및 조향 포함 v2) - 총 28바이트
 // =============================================================
 struct DownlinkPacket {
     uint8_t  sync;           // 0xAA
@@ -73,11 +73,13 @@ struct DownlinkPacket {
 };
 
 // =============================================================
-// 4. 어뢰 -> 통제소 Uplink 패킷 - 총 23바이트
+// 4. 어뢰 -> 통제소 Uplink 패킷 - 총 26바이트
 // =============================================================
 struct UplinkPacket {
-    uint8_t  sync;           // 0xBB 고정
-    uint32_t timestamp_us;   // 어뢰 내부 시계 기준 μs
+    uint8_t  sync;           // 0xAA
+    uint8_t  sync2;          // 0x55
+    uint8_t  msg_id;         // 0x00
+    uint8_t  length;         // payload 크기 (byte)
     uint16_t seq;            // 시퀀스 번호
     float    p_x;            // 어뢰 현재 위치 X (m)
     float    p_y;            // 어뢰 현재 위치 Y (m)
@@ -91,7 +93,7 @@ struct UplinkPacket {
 // [ 크기 검증 상수 (Compile-time Assert) ]
 // =============================================================
 static_assert(sizeof(DownlinkPacket) == 27, "DownlinkPacket size must be 27 bytes");
-static_assert(sizeof(UplinkPacket) == 23, "UplinkPacket size must be 23 bytes");
+static_assert(sizeof(UplinkPacket) == 22, "UplinkPacket size must be 22 bytes");
 
 #pragma pack(pop)
 
@@ -99,17 +101,15 @@ static_assert(sizeof(UplinkPacket) == 23, "UplinkPacket size must be 23 bytes");
 // =============================================================
 // [ 프로토콜 매크로 및 비트 플래그 정의 ]
 // =============================================================
-// GUI 명령어 Type
-#define PKT_TYPE_TARGET   0x10
-#define PKT_TYPE_OPEN     0x11
-#define PKT_TYPE_FIRE     0x12
-#define PKT_TYPE_ENDGUIDE 0x13
+// 1. HMI(GUI) -> 통제소(Zynq) 명령어 Type (TCP)
+#define CMD_TARGET    0x10  // 목표물 좌표 설정
+#define CMD_OPEN      0x11  // 개폐 명령
+#define CMD_FIRE      0x12  // 발사 명령
+#define CMD_ENDGUIDE  0x13  // 종말 유도 명령
 
-// DownlinkPacket용 flags 비트 마스크 선언
-constexpr uint8_t FLAG_ASTAR_VALID    = 0x01; // A* 경로 계획 성공 및 유효함
-constexpr uint8_t FLAG_LIDAR_DETECTED = 0x02; // 라이다 동적 객체(어뢰) 감지 성공
-constexpr uint8_t FLAG_LATENCY_COMP   = 0x04; // 지연 보상 제어 로직 활성화 상태
-constexpr uint8_t FLAG_COLLISION_WARN = 0x08; // 전방 장애물 충돌 위험 경고
+// 2. 통제소(Zynq) -> 어뢰(Zynq) 유도 모드 Flag (UART 460800)
+constexpr uint8_t FLAG_GUIDANCE_MIDCOURSE = 0x01; // 중기유도 (A* + LatencyAwareCtrl)
+constexpr uint8_t FLAG_GUIDANCE_TERMINAL  = 0x02; // 종말유도 (어뢰에서 알아서 작동)
 
 // =============================================================
 // [ 공통 유틸리티 클래스 ]

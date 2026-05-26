@@ -16,7 +16,7 @@ private:
     std::vector<Point2D> background_points;    // 배경 캘리브레이션 데이터
 
     // ─────────────────────────────────────────
-    // 내부 데이터 처리 파이프라인
+    // 내부 데이터 처리 파이프라인 (Private 멤버 함수)
     // ─────────────────────────────────────────
     
     // 1단계: 원시 데이터 전처리 (품질 필터링 + FOV 제한)
@@ -54,15 +54,15 @@ public:
     // @param duration_sec: 캘리브레이션 시간 (초)
     void startCalibration(int duration_sec);
     
-    // 장애물 클러스터 획득 (GUI 전송용, 50mm 그리드)
-    std::vector<std::vector<PointGrid>> getGridObstacles();
+    // 💡 [개선 완료] 통합 데이터 처리 파이프라인 함수
+    // 단 한 번의 스캔(Grab)으로 GUI 격자 맵과 제어용 어뢰 위치를 동시에 연산 및 분기 출력
+    // @param car_pos: [Output] 배경이 제거된 어뢰(동적 객체)의 중심 위치 (mm)
+    // @param grid_clusters: [Output] GUI 전송용 전체 환경 격자 지도 데이터 (m)
+    // @return: true = 어뢰 추적 성공, false = 라이다 데이터 획득 실패 혹은 어뢰 놓침
+    bool processLidarFrame(Point2D& car_pos, std::vector<std::vector<PointGrid>>& grid_clusters);
     
     // 배경 포인트 반환 (디버깅/시각화용)
     std::vector<Point2D> getBackgroundPoints() { return background_points; }
-    
-    // 동적 객체(어뢰) 위치 추적
-    // @return: true=객체 발견, false=없음
-    bool getDynamicCarPosition(Point2D& car_pos);
 };
 
 #endif

@@ -7,46 +7,58 @@
 #include <cmath>
 #include <chrono>
 
+
+static speed_t toSpeedT(int baud) {
+
+    switch (baud) {
+        case 9600:   return B9600;
+        case 19200:  return B19200;
+        case 38400:  return B38400;
+        case 57600:  return B57600;
+        case 115200: return B115200;
+        case 230400: return B230400;
+        case 460800: return B460800;
+        default:
+            fprintf(stderr, "  [UART Warn] Unsupported baudrate %d, falling back to 9600\n", baud);
+            return B9600;
+    }
+}
 // ═══════════════════════════════════════════════
 // 생성자: UART 시리얼 포트 초기화
 // ═══════════════════════════════════════════════
 UartNode::UartNode(const char* port, int baudrate) {
-    fprintf(stderr, "  [UART] Opening %s...\n", port);
-    fflush(stderr);
-    
-    // 시리얼 포트 열기
-    fd = open(port, O_RDWR | O_NOCTTY | O_NDELAY);
-    if (fd == -1) {
-        fprintf(stderr, "  [UART Error] Cannot open %s: %s\n", 
+
+    fd = open(port, O_RDWR | O_NOCTTY | O_NONBLOCK);
+    if (fd < 0) {
+        fprintf(stderr, "  [UART Error] Cannot open %s: %s\n",
                 port, strerror(errno));
         fflush(stderr);
+        this->fd = -1;
         return;
     }
-    
-    fprintf(stderr, "  [UART] Port opened (fd=%d), configuring...\n", fd);
-    fflush(stderr);
 
-    // termios 구조체로 시리얼 설정
     struct termios options;
-    tcgetattr(fd, &options);
-    cfsetispeed(&options, B115200);
-    cfsetospeed(&options, B115200);
+    std::memset(&options, 0, sizeof(options));
+    if (tcgetattr(fd, &options) != 0) return ;
+
+    speed_t speed = toSpeedT(baudrate);
+    cfsetispeed(&options, speed);
+    cfsetospeed(&options, speed);
+
     
-    options.c_cflag |= (CLOCAL | CREAD);
-    options.c_cflag &= ~PARENB;
-    options.c_cflag &= ~CSTOPB;
-    options.c_cflag &= ~CSIZE;
-    options.c_cflag |= CS8;
-    
-    options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
-    options.c_iflag &= ~(IXON | IXOFF | IXANY);
+    options.c_cflag &= ~(PARENB | CSTOPB | CSIZE | CRTSCTS);
+    options.c_iflag &= ~(IXON | IXOFF | IXANY | IGNBRK | BRKINT | PARMRK | ISTRIP | INLCR | IGNCR | ICRNL);
     options.c_oflag &= ~OPOST;
-    
-    tcsetattr(fd, TCSANOW, &options);
-    fcntl(fd, F_SETFL, 0); // Blocking 모드
-    
-    fprintf(stderr, "  [UART] Configuration complete\n");
-    fflush(stderr);
+    options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
+    options.c_cflag |= (CLOCAL | CREAD | CS8);
+    options.c_iflag |= IGNPAR;
+
+    options.c_cc[VMIN]  = 0;
+    options.c_cc[VTIME] = 0;
+
+    tcflush(fd, TCIOFLUSH);
+    if (tcsetattr(fd, TCSANOW, &options) != 0) return ;
+    return ;
 }
 
 // ═══════════════════════════════════════════════
@@ -79,7 +91,7 @@ void UartNode::sendGuiPacket(float torpedo_x, float torpedo_y,
         Protocol::packU16(buf, (uint16_t)cluster.size());
         for (const auto& pg : cluster) {
             float cx = (pg.x == 0.0f && pg.y == 0.0f) ? std::nanf("") : pg.x;
-            float cy = (pg.x == 0.0f && pg.y == 0.0f) ? std::nanf("") : pg.y;
+                        float cy = (pg.x == 0.0f && pg.y == 0.0f) ? std::nanf("") : pg.y;
             Protocol::packFloat(buf, cx);
             Protocol::packFloat(buf, cy);
         }
@@ -105,7 +117,7 @@ bool UartNode::receiveGuiCommand(GuiCommandPacket& pkt) {
             pkt.seq  = buf[0] | (buf[1] << 8);
             pkt.type = buf[2];
 
-            if (pkt.type == PKT_TYPE_TARGET) {
+            if (pkt.type == CMD_TARGET) {
                 uint8_t payload[10];
                 if (read(fd, payload, 10) == 10) {
                     memcpy(&pkt.target_x, payload, 4);
@@ -141,7 +153,7 @@ void UartNode::sendDownlink(float target_x, float target_y,
     pkt.sync      = 0xAA;
     pkt.sync2     = 0x55;
     pkt.msg_id    = 0x00;
-    pkt.length    = sizeof(DownlinkPacket) - 4;
+    pkt.length    = 21;
     pkt.seq       = seq;
     pkt.target_x  = target_x;
     pkt.target_y  = target_y;
@@ -152,44 +164,70 @@ void UartNode::sendDownlink(float target_x, float target_y,
     pkt.crc16     = Protocol::calculateCRC16((uint8_t*)&pkt, sizeof(pkt) - 2);
 
     write(fd, &pkt, sizeof(pkt));
-
-    // ⭐ 로그 추가 (10ms마다 찍히니까 100ms에 1번만 출력)
-    int ret = write(fd, &pkt, sizeof(pkt));
-
-    if (seq % 10 == 0) {
-        fprintf(stderr, "[Downlink TX] seq:%u ret:%d "
-                "target:(%.2f,%.2f) "
-                "torpedo:(%.2f,%.2f) "
-                "steer:%d flags:0x%02X\n",
-                seq, ret,
-                target_x, target_y,
-                std::isnan(torpedo_x) ? -1.0f : torpedo_x,
-                std::isnan(torpedo_y) ? -1.0f : torpedo_y,
-                steer, flags);
-        fflush(stderr);
-    }
 }
 
 // ═══════════════════════════════════════════════
 // 어뢰 → 통제소 Uplink 수신
 // ═══════════════════════════════════════════════
 bool UartNode::receiveUplinkStatus(UplinkPacket& pkt) {
-    uint8_t head;
-    if (read(fd, &head, 1) > 0 && head == 0xBB) {
-        // 구조체의 나머지 부분 읽기 (sync 제외)
-        uint8_t* payload = ((uint8_t*)&pkt) + 1;
-        int total_read = 0;
-        int remain = sizeof(UplinkPacket) - 1;
-        
-        while (total_read < remain) {
-            int n = read(fd, payload + total_read, remain - total_read);
-            if (n > 0) total_read += n;
+    if (fd < 0) return false;
+
+    // sync 탐색
+    uint8_t h1, h2;
+    if (read(fd, &h1, 1) <= 0 || h1 != 0xAA) return false;
+    if (read(fd, &h2, 1) <= 0 || h2 != 0x55) return false;
+
+    pkt.sync = 0xAA;
+        pkt.sync2 = 0x55;
+
+    // header 이후 나머지 바이트를 버퍼로 수신
+    constexpr int REMAIN = sizeof(UplinkPacket) - 2; // 20 bytes
+    uint8_t buf[REMAIN];
+    int total = 0;
+    // int retry = 0;
+        while (total < REMAIN) {
+            int n = read(fd, buf + total, REMAIN - total);
+            if (n > 0) {
+                total += n;
+                // retry = 0;
+            } else if (n < 0 && errno != EAGAIN) {
+                return false;
+            } 
+            // else {
+            //     usleep(100);
+            //     if (++retry > 1000) return false; // 100ms 타임아웃
+            // }
         }
-        pkt.sync = 0xBB;
         
-        // CRC 검증
-        uint16_t calc_crc = Protocol::calculateCRC16((uint8_t*)&pkt, sizeof(UplinkPacket) - 2);
-        return (calc_crc == pkt.crc16);
+    fprintf(stderr, "[Uplink RX] Raw bytes: %d", total);
+    for (int i = 0; i < REMAIN; i++) {
+        fprintf(stderr, " %02X", buf[i]);
     }
-    return false;
+    fprintf(stderr, "\n");
+
+    // 버퍼에서 필드별 역직렬화
+    int off = 0;
+    pkt.msg_id = buf[off++];
+    pkt.length = buf[off++];
+    memcpy(&pkt.seq,          buf + off, sizeof(pkt.seq));   off += sizeof(pkt.seq);
+    memcpy(&pkt.p_x,          buf + off, sizeof(pkt.p_x));   off += sizeof(pkt.p_x);
+    memcpy(&pkt.p_y,          buf + off, sizeof(pkt.p_y));   off += sizeof(pkt.p_y);
+    memcpy(&pkt.yaw,          buf + off, sizeof(pkt.yaw));   off += sizeof(pkt.yaw);
+    pkt.status_flags = buf[off++];
+    pkt.reserved     = buf[off++];
+    memcpy(&pkt.crc16,        buf + off, sizeof(pkt.crc16));
+    pkt.yaw = pkt.yaw * 180.0f / M_PI;
+    fprintf(stderr, "[Uplink RX] seq:%u p_x:%.2f p_y:%.2f yaw:%.2f flags:0x%02X\n",
+    pkt.seq, pkt.p_x, pkt.p_y, pkt.yaw, pkt.status_flags);
+ 
+
+    // if (pkt.seq % 500 == 0) {
+    //     fprintf(stderr, "[Uplink RX] seq:%u p_x:%.2f p_y:%.2f yaw:%.2f flags:0x%02X\n",
+    //             pkt.seq, pkt.p_x, pkt.p_y, pkt.yaw, pkt.status_flags);
+    // }
+
+
+    // CRC 검증 (crc16 필드 제외한 전체 구조체 대상)
+    uint16_t calc_crc = Protocol::calculateCRC16((uint8_t*)&pkt, sizeof(UplinkPacket) - sizeof(pkt.crc16));
+    return (calc_crc == pkt.crc16);
 }
