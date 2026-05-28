@@ -172,62 +172,77 @@ void UartNode::sendDownlink(float target_x, float target_y,
 bool UartNode::receiveUplinkStatus(UplinkPacket& pkt) {
     if (fd < 0) return false;
 
-    // sync 탐색
+    // Zynq 명세 기준 고정 사이즈 정의
+    constexpr size_t PAYLOAD_SIZE = 16;  // sizeof(Payload) -> seq(4)+p_x(4)+p_y(4)+yaw(4)
+    constexpr size_t HEADER_SIZE = 4;   // SYNC1(1) + SYNC2(1) + MSG_ID(1) + LENGTH(1)
+    constexpr size_t CRC_SIZE = 2;      // Policy::CRC_SIZE (uint16_t)
+    constexpr size_t TOTAL_PACKET_SIZE = HEADER_SIZE + PAYLOAD_SIZE + CRC_SIZE; // 22 Bytes
+
+    // 1. 헤더 싱크 동기화 탐색
     uint8_t h1, h2;
-    if (read(fd, &h1, 1) <= 0 || h1 != 0xAA) return false;
-    if (read(fd, &h2, 1) <= 0 || h2 != 0x55) return false;
+    if (read(fd, &h1, 1) <= 0 || h1 != 0xAA) return false; // Policy::SYNC1
+    if (read(fd, &h2, 1) <= 0 || h2 != 0x55) return false; // Policy::SYNC2
 
     pkt.sync = 0xAA;
-        pkt.sync2 = 0x55;
+    pkt.sync2 = 0x55;
 
-    // header 이후 나머지 바이트를 버퍼로 수신
-    constexpr int REMAIN = sizeof(UplinkPacket) - 2; // 20 bytes
-    uint8_t buf[REMAIN];
-    int total = 0;
-    // int retry = 0;
-        while (total < REMAIN) {
-            int n = read(fd, buf + total, REMAIN - total);
-            if (n > 0) {
-                total += n;
-                // retry = 0;
-            } else if (n < 0 && errno != EAGAIN) {
-                return false;
-            } 
-            // else {
-            //     usleep(100);
-            //     if (++retry > 1000) return false; // 100ms 타임아웃
-            // }
+    // 2. 나머지 패킷 전체(20바이트) 한 번에 수집용 버퍼
+    // [msg_id(1) + length(1) + payload(16) + crc(2)]
+    constexpr size_t REMAIN_SIZE = TOTAL_PACKET_SIZE - 2;
+    uint8_t rx_buf[REMAIN_SIZE];
+    
+    size_t total = 0;
+    while (total < REMAIN_SIZE) {
+        int n = read(fd, rx_buf + total, REMAIN_SIZE - total);
+        if (n > 0) {
+            total += n;
+        } else if (n < 0 && errno != EAGAIN) {
+            return false;
         }
-        
-    fprintf(stderr, "[Uplink RX] Raw bytes: %d", total);
-    for (int i = 0; i < REMAIN; i++) {
-        fprintf(stderr, " %02X", buf[i]);
     }
-    fprintf(stderr, "\n");
 
-    // 버퍼에서 필드별 역직렬화
-    int off = 0;
-    pkt.msg_id = buf[off++];
-    pkt.length = buf[off++];
-    memcpy(&pkt.seq,          buf + off, sizeof(pkt.seq));   off += sizeof(pkt.seq);
-    memcpy(&pkt.p_x,          buf + off, sizeof(pkt.p_x));   off += sizeof(pkt.p_x);
-    memcpy(&pkt.p_y,          buf + off, sizeof(pkt.p_y));   off += sizeof(pkt.p_y);
-    memcpy(&pkt.yaw,          buf + off, sizeof(pkt.yaw));   off += sizeof(pkt.yaw);
-    pkt.status_flags = buf[off++];
-    pkt.reserved     = buf[off++];
-    memcpy(&pkt.crc16,        buf + off, sizeof(pkt.crc16));
-    pkt.yaw = pkt.yaw * 180.0f / M_PI;
-    fprintf(stderr, "[Uplink RX] seq:%u p_x:%.2f p_y:%.2f yaw:%.2f flags:0x%02X\n",
-    pkt.seq, pkt.p_x, pkt.p_y, pkt.yaw, pkt.status_flags);
- 
+    // 변수 분리 분기점 데이터 매핑
+    uint8_t msg_id = rx_buf[0];
+    uint8_t length = rx_buf[1];
 
-    // if (pkt.seq % 500 == 0) {
-    //     fprintf(stderr, "[Uplink RX] seq:%u p_x:%.2f p_y:%.2f yaw:%.2f flags:0x%02X\n",
-    //             pkt.seq, pkt.p_x, pkt.p_y, pkt.yaw, pkt.status_flags);
-    // }
+    // 3. 🎯 [Zynq 1:1 일치] CRC 검증부 
+    // Zynq line 68: buffer + 2 부터 2 + payload_size 만큼만 CRC 계산
+    // 즉, rx_buf의 처음(msg_id)부터 페이로드 끝까지가 CRC 계산 대상 범위입니다.
+    uint16_t calc_crc = Protocol::calculateCRC16(rx_buf, 2 + PAYLOAD_SIZE);
 
+    // Zynq line 71 방식 역추적: 리틀 엔디안 바이트 스트림 조합으로 수신 CRC 복원
+    uint16_t received_crc = static_cast<uint16_t>(rx_buf[REMAIN_SIZE - 2]) | 
+                            (static_cast<uint16_t>(rx_buf[REMAIN_SIZE - 1]) << 8);
 
-    // CRC 검증 (crc16 필드 제외한 전체 구조체 대상)
-    uint16_t calc_crc = Protocol::calculateCRC16((uint8_t*)&pkt, sizeof(UplinkPacket) - sizeof(pkt.crc16));
-    return (calc_crc == pkt.crc16);
+    // 완벽한 무결성 비교 검증
+    if (calc_crc != received_crc) {
+        static int debug_cnt = 0;
+        if (debug_cnt++ % 200 == 0) {
+            fprintf(stderr, "[Uplink CRC Error] 범위 정정 후 검증 미스매치! Calc: 0x%04X, Recv: 0x%04X\n", calc_crc, received_crc);
+        }
+        return false;
+    }
+
+    // 4. 안전한 역직렬화 (Marshaller::deserialize 우회 구조체 안전 복사)
+    pkt.msg_id = msg_id;
+    pkt.length = length;
+
+    // rx_buf[2] 가 순수 페이로드(packet.payload)의 시작 시점입니다.
+    int off = 2; 
+    memcpy(&pkt.seq,          rx_buf + off, sizeof(pkt.seq));        off += sizeof(pkt.seq);
+    memcpy(&pkt.p_x,          rx_buf + off, sizeof(pkt.p_x));        off += sizeof(pkt.p_x);
+    memcpy(&pkt.p_y,          rx_buf + off, sizeof(pkt.p_y));        off += sizeof(pkt.p_y);
+    memcpy(&pkt.yaw,          rx_buf + off, sizeof(pkt.yaw));        off += sizeof(pkt.yaw);
+    pkt.status_flags = rx_buf[off++];
+    pkt.reserved     = rx_buf[off++];
+    pkt.crc16        = received_crc;
+
+    // 5. 완벽 동기화 공유 변수 데이터 반영 성공 로그
+    static int win_cnt = 0;
+    if (win_cnt++ % 50 == 0) {
+        fprintf(stderr, "[Uplink RX] 🚀 [Zynq 프로토콜 동기화 완료] seq:%u x:%.2f y:%.2f yaw:%.2f\n", 
+                pkt.seq, pkt.p_x, pkt.p_y, pkt.yaw * (180.0f / M_PI));
+    }
+
+    return true;
 }

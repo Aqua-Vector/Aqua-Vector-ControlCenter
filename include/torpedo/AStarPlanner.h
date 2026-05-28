@@ -43,28 +43,37 @@ public:
 
     bool isReady() const { return is_path_valid.load(); }
 
-    // 10ms 주기 제어 루프가 호출하는 지연 시간 선행 보정 경로 보간 로직
-    float getNextWaypointY(float current_x_meters, float current_vel_ms = 0.0f) const {
+        float getNextWaypointY(float current_x_meters, float current_vel_ms = 0.0f) const {
         if (!is_path_valid.load()) return 0.0f;
-
-        float vel = (current_vel_ms > 0.001f) ? current_vel_ms : base_velocity;
-        
-        // 핵심 물리 수식: 지연 시간(Latency) 동안 어뢰가 전진할 물리적 선행 보정 거리 계산
-        float look_ahead_dist = (vel * latency_sec) + 0.12f; 
-        float target_x = current_x_meters + look_ahead_dist;
 
         std::lock_guard<std::mutex> lock(path_mtx);
         if (path.size() < 2) return 0.0f;
 
-        // 타겟 X에 인접한 웨이포인트 구간 선형 보간(Linear Interpolation) 처리
-        if (target_x <= path.front().x) return path.front().y;
-        if (target_x >= path.back().x) return path.back().y;
+        float vel = (current_vel_ms > 0.001f) ? current_vel_ms : base_velocity;
+        float look_ahead_dist = (vel * latency_sec) + 0.12f;
 
+        // ── X 이동 방향 자동 감지 ──
+        float dx = path.back().x - path.front().x;
+        float dir = (dx >= 0.0f) ? 1.0f : -1.0f;
+        float target_x = current_x_meters + dir * look_ahead_dist;
+
+        // ── 경계 처리 ──
+        float x_min = std::min(path.front().x, path.back().x);
+        float x_max = std::max(path.front().x, path.back().x);
+        target_x = std::max(x_min, std::min(x_max, target_x));
+
+        // ── 선형 보간 ──
         for (size_t i = 0; i + 1 < path.size(); ++i) {
-            if (target_x >= path[i].x && target_x <= path[i+1].x) {
-                float ratio = (target_x - path[i].x) / (path[i+1].x - path[i].x);
+            float xa = path[i].x, xb = path[i+1].x;
+            float lo = std::min(xa, xb), hi = std::max(xa, xb);
+            if (target_x >= lo && target_x <= hi) {
+                float segment_len = std::abs(xb - xa);
+                if (segment_len < 1e-5f) return path[i].y;
+                        
+                // 🌟 절대 거리 기준 비율 계산 (부호 버그 원천 차단)
+                float ratio = std::abs(target_x - xa) / segment_len;
                 return path[i].y + ratio * (path[i+1].y - path[i].y);
-            }
+                }
         }
         return path.back().y;
     }

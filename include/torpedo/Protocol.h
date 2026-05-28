@@ -110,6 +110,7 @@ static_assert(sizeof(UplinkPacket) == 22, "UplinkPacket size must be 22 bytes");
 // 2. 통제소(Zynq) -> 어뢰(Zynq) 유도 모드 Flag (UART 460800)
 constexpr uint8_t FLAG_GUIDANCE_MIDCOURSE = 0x01; // 중기유도 (A* + LatencyAwareCtrl)
 constexpr uint8_t FLAG_GUIDANCE_TERMINAL  = 0x02; // 종말유도 (어뢰에서 알아서 작동)
+constexpr uint8_t FLAG_GUIDANCE_ARRIVE  = 0x03; // 정지 
 
 // =============================================================
 // [ 공통 유틸리티 클래스 ]

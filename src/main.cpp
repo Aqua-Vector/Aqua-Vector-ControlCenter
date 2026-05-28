@@ -6,7 +6,8 @@
 #include <chrono>
 #include <cmath>
 #include <arpa/inet.h> 
-#include <memory> // 스마트 포인터 사용을 위해 추가
+#include <memory> 
+#include <csignal>
 
 #include "LidarNode.h"
 #include "ServoNode.h"
@@ -18,9 +19,8 @@
 
 // ── 공유 자원 ─────────────────────────────────────────
 std::mutex mtx;
-TorpedoPose current_torpedo_state = {{0,0}, 0, 90.0, 0, 0};
-Point2D gui_target = {5000, 5000}; // mm 단위
-bool is_launched = false;
+TorpedoPose current_torpedo_state = {{0,0}, 0, 0.0, 0, 0};
+std::atomic<bool> is_launched{false}; 
 uint16_t downlink_seq = 0;
 uint16_t gui_seq = 0;
 std::chrono::steady_clock::time_point system_start_time;
@@ -42,7 +42,7 @@ std::atomic<bool>  atomic_astar_valid{false};
 std::atomic<bool>  is_terminal_guidance{false}; 
 std::atomic<bool> system_running{true};
 
-// ── 전역 포인터 (스마트 포인터로 변경) ──────────────────────────────────
+// ── 전역 포인터 (스마트 포인터) ──────────────────────────────────
 std::unique_ptr<LidarNode> lidar;
 std::unique_ptr<UartNode> uart_torpedo;
 std::unique_ptr<UartNode> uart_gui;
@@ -61,21 +61,15 @@ void thread_lidar_tracking() {
     while (system_running.load()) {
         auto loop_start = std::chrono::steady_clock::now();
 
-        // 통합 함수 딱 하나만 호출하여 데이터와 좌표를 동시에 획득!
         if (lidar->processLidarFrame(car_pos, local_grid_obs)) {
-            
-            // 1. GUI 전송용 공유 격자 맵 업데이트
             {
                 std::lock_guard<std::mutex> lock(mtx);
                 shared_grid_obstacles = local_grid_obs;
             }
-
-            // 2. 제어 루프용 어뢰 좌표 원자적 업데이트
             atomic_torpedo_x_m.store(car_pos.x / 1000.0f);
             atomic_torpedo_y_m.store(car_pos.y / 1000.0f);
             atomic_lidar_valid.store(true);
         } else {
-            // 어뢰를 놓쳤을 때 처리
             atomic_lidar_valid.store(false);
         }
 
@@ -87,23 +81,42 @@ void thread_lidar_tracking() {
 }
 
 // ─────────────────────────────────────────
-// Thread 2: 어뢰 → 통제소 Uplink 수신
+// Thread 2: 어뢰 → 통제소 Uplink 수신 (수정본)
 // ─────────────────────────────────────────
 void thread_torpedo_rx() {
     UplinkPacket pkt;
+    int consecutive_fail_cnt = 0; 
+
     while (system_running.load()) {
         if (uart_torpedo->receiveUplinkStatus(pkt)) {
+            consecutive_fail_cnt = 0; 
+
             std::lock_guard<std::mutex> lock(mtx);
-            current_torpedo_state.position.x = pkt.p_x * 1000.0f;
-            current_torpedo_state.position.y = pkt.p_y * 1000.0f;
-            current_torpedo_state.heading    = pkt.yaw * (180.0f / M_PI);
             
-            std::cout << "[Uplink] SEQ:" << pkt.seq
-                      << " X:" << pkt.p_x << "m"
-                      << " Y:" << pkt.p_y << "m"
-                      << " Yaw:" << pkt.yaw << "rad"
-                      << " Flags:" << (int)pkt.status_flags << std::endl;
+            // 🐛 [버그 수정]: 원본 데이터(m)를 1000배 튀기지 않고 그대로 주입합니다.
+            current_torpedo_state.position.x = pkt.p_x; 
+            current_torpedo_state.position.y = pkt.p_y;
+            
+            current_torpedo_state.heading    = pkt.yaw;  
+            current_torpedo_state.seq        = pkt.seq;
+            current_torpedo_state.flags      = pkt.status_flags;
+
+            // 디버그 출력
+            static int rx_sync_cnt = 0;
+            if (rx_sync_cnt++ % 100 == 0) {
+                fprintf(stdout, "[Thread 2 디버그] 공유 변수 주입 성공! seq: %u, x: %.2f, yaw: %.2f\n", 
+                        current_torpedo_state.seq, current_torpedo_state.position.x, current_torpedo_state.heading);
+                fflush(stdout);
+            }
+        } else {
+            consecutive_fail_cnt++;
+
+            if (consecutive_fail_cnt >= 100) {
+                fprintf(stderr, "[Thread 2 경고] 🚨 통신 끊김 감지! 0.5초간 Uplink 패킷 수신 불가능.\n");
+                consecutive_fail_cnt = 80; 
+            }
         }
+        
         usleep(5000);
     }
 }
@@ -122,34 +135,29 @@ void thread_gui_rx() {
 
         if (got_cmd) {
             switch (pkt.type) {
-                case CMD_OPEN:  // 0x11
+                case CMD_OPEN:  
                     hatch_servo->setAngle(pkt.cmd_data ? 180 : 90);
-                    fprintf(stderr, "[CMD] Hatch %s\n",
-                            pkt.cmd_data ? "OPEN" : "CLOSE");
+                    fprintf(stderr, "[CMD] Hatch %s\n", pkt.cmd_data ? "OPEN" : "CLOSE");
                     break;
 
-                case CMD_FIRE:  // 0x12 → 중기유도 시작
-                    is_launched = true;
+                case CMD_FIRE:  
+                    is_launched.store(true); 
                     is_terminal_guidance.store(false);
                     fprintf(stderr, "[CMD] FIRE → 중기유도(0x01) 시작\n");
                     break;
 
-                case CMD_ENDGUIDE:  // 0x13 → 종말유도 트리거
+                case CMD_ENDGUIDE:  
                     is_terminal_guidance.store(true);
                     fprintf(stderr, "[CMD] ENDGUIDE → 종말유도(0x02) 전송\n");
                     break;
 
-                case CMD_TARGET:  // 0x10 → 목표 좌표 업데이트
-                {
-                    std::lock_guard<std::mutex> lock(mtx);
-                    gui_target.x = pkt.target_x * 1000.0f;
-                    gui_target.y = pkt.target_y * 1000.0f;
-                    atomic_tar_x_meters.store(pkt.target_x);
-                    atomic_tar_y_meters.store(pkt.target_y);
-                    fprintf(stderr, "[CMD] Target: (%.2f, %.2f) m\n",
-                            pkt.target_x, pkt.target_y);
-                    break;
-                }
+                case CMD_TARGET:  
+                    {
+                        atomic_tar_x_meters.store(pkt.target_x);
+                        atomic_tar_y_meters.store(pkt.target_y);
+                        fprintf(stderr, "[CMD] Target: (%.2f, %.2f) m\n", pkt.target_x, pkt.target_y);
+                        break;
+                    }
             }
         }
         usleep(10000);
@@ -167,16 +175,14 @@ void thread_gui_tx() {
             std::lock_guard<std::mutex> lock(mtx);
             grid_copy = shared_grid_obstacles;
             
-            // 어뢰 위치 상태 데이터 미터 단위 매핑
             tx_x = (current_torpedo_state.position.x == 0 && current_torpedo_state.position.y == 0)
                    ? std::nanf("") : current_torpedo_state.position.x / 1000.0f;
             tx_y = (current_torpedo_state.position.x == 0 && current_torpedo_state.position.y == 0)
                    ? std::nanf("") : current_torpedo_state.position.y / 1000.0f;
             tx_yaw = std::isnan(current_torpedo_state.heading)
-                     ? std::nanf("") : current_torpedo_state.heading * (M_PI / 180.0f); // rad 변환
+                     ? std::nanf("") : current_torpedo_state.heading * (M_PI / 180.0f); 
         }
 
-        // UART 및 UDP 패킷 송신 일원화
         uart_gui->sendGuiPacket(tx_x, tx_y, tx_yaw, grid_copy, gui_seq);
         network->sendGuiPacketUDP(tx_x, tx_y, tx_yaw, grid_copy, gui_seq);
 
@@ -185,71 +191,6 @@ void thread_gui_tx() {
     }
 }
 
-// ─────────────────────────────────────────
-// Thread 5: 정밀 지연 보상 제어 루프 및 어뢰 Downlink (10ms)
-// ─────────────────────────────────────────
-// void thread_control_loop() {
-//     while (system_running.load()) {
-//         auto loop_start = std::chrono::steady_clock::now();
-
-//         if (uart_torpedo) {
-//             uint8_t tx_flags = 0;
-            
-//             if (is_terminal_guidance.load()) {
-//                 // ── [종말유도 상태] 어뢰 자체 제어 위임 ──
-//                 tx_flags = FLAG_GUIDANCE_TERMINAL; // 0x02
-
-//                 uart_torpedo->sendDownlink(
-//                     std::nanf(""),  // target_x 없음
-//                     std::nanf(""),  // target_y 없음
-//                     std::nanf(""),  // torpedo_x 없음
-//                     std::nanf(""),  // torpedo_y 없음
-//                     0,              // steer 없음
-//                     tx_flags,       // 0x02 전송
-//                     downlink_seq++
-//                 );
-//             } else if (is_launched) {
-//                 // ── [중기유도 상태] 통제소에서 조향각 계산 ──
-//                 tx_flags = FLAG_GUIDANCE_MIDCOURSE; // 0x01
-
-//                 float cur_x = atomic_torpedo_x_m.load();
-//                 float cur_y = atomic_torpedo_y_m.load();
-//                 float target_y_compensated = 0.0f;
-
-//                 if (astar_planner && atomic_astar_valid.load()) {
-//                     target_y_compensated = astar_planner->getNextWaypointY(cur_x, 0.15f);
-//                 }
-
-//                 TorpedoPose state_copy;
-//                 {
-//                     std::lock_guard<std::mutex> lock(mtx);
-//                     state_copy = current_torpedo_state;
-//                 }
-
-//                 int steer = latency_controller->compute(
-//                     state_copy.position.y / 1000.0f,
-//                     target_y_compensated,
-//                     0.01f
-//                 );
-
-//                 uart_torpedo->sendDownlink(
-//                     atomic_tar_x_meters.load(),
-//                     target_y_compensated,
-//                     atomic_lidar_valid.load() ? cur_x : std::nanf(""),
-//                     atomic_lidar_valid.load() ? cur_y : std::nanf(""),
-//                     static_cast<int16_t>(steer),
-//                     tx_flags,       // 0x01 전송
-//                     downlink_seq++
-//                 );
-//             }
-//         }
-
-//         auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(
-//             std::chrono::steady_clock::now() - loop_start).count();
-//         long sleep_us = 10000 - elapsed;
-//         if (sleep_us > 0) usleep(sleep_us);
-//     }
-// }
 
 // ─────────────────────────────────────────
 // Thread 5: 정밀 지연 보상 제어 루프 및 어뢰 Downlink (10ms)
@@ -262,85 +203,12 @@ void thread_gui_tx() {
 //             uint8_t tx_flags = 0;
             
 //             if (is_terminal_guidance.load()) {
-//                 // ── [종말유도 상태] 어뢰 자체 제어 위임 ──
-//                 tx_flags = FLAG_GUIDANCE_TERMINAL; // 0x02
-
-//                 uart_torpedo->sendDownlink(
-//                     std::nanf(""),  // target_x 없음
-//                     std::nanf(""),  // target_y 없음
-//                     std::nanf(""),  // torpedo_x 없음
-//                     std::nanf(""),  // torpedo_y 없음
-//                     0,              // steer 없음
-//                     tx_flags,       // 0x02 전송
-//                     downlink_seq++
-//                 );
-//         //     } else if (is_launched) {
-//         //         // ── [중기유도 상태] 통제소에서 조향각 계산 ──
-//         //         tx_flags = FLAG_GUIDANCE_MIDCOURSE; // 0x01
-
-//         //         // 💡 1. 라이다가 측정한 생(Raw) 좌표 읽기 (어뢰 다운링크 전송용)
-//         //         float lidar_x = atomic_torpedo_x_m.load();
-//         //         float lidar_y = atomic_torpedo_y_m.load();
-
-//         //         // 💡 2. 뮤텍스 락을 위로 이동: 어뢰가 보낸 업링크 데이터 최우선 복사
-//         //         TorpedoPose state_copy;
-//         //         {
-//         //             std::lock_guard<std::mutex> lock(mtx);
-//         //             state_copy = current_torpedo_state;
-//         //         }
-
-//         //         // 💡 3. 제어에 사용할 어뢰 피드백 위치 추출 (미터 단위 변환)
-//         //         // ※ 만약 Uplink 수신부에서 이미 미터 단위로 저장했다면 /1000.0f을 지워주세요!
-//         //         float uplink_x_m = state_copy.position.x;
-//         //         float uplink_y_m = state_copy.position.y;
-
-//         //         // float uplink_yaw = state_copy.yaw; // 필요 시 제어기 확장용
-
-//         //         // 💡 4. [변경] 라이다 X 대신 '어뢰 업링크 X'를 기준으로 A* 다음 웨이포인트 탐색
-//         //         float target_y_compensated = 0.0f;
-//         //         if (astar_planner && atomic_astar_valid.load()) {
-//         //             target_y_compensated = astar_planner->getNextWaypointY(uplink_x_m, 0.15f);
-//         //         }
-
-//         //         // 💡 5. [변경] '어뢰 업링크 Y'와 경로점 오차를 계산하여 Latency_Aware 제어 수행
-//         //         int steer = latency_controller->compute(
-//         //             uplink_y_m,
-//         //             target_y_compensated,
-//         //             0.01f
-//         //         );
-
-//         //         // 💡 6. 다운링크 전송: torpedo_x/y 자리에는 라이다 생(Raw) 측정값을 실어서 송신
-//         //         uart_torpedo->sendDownlink(
-//         //             atomic_tar_x_meters.load(),
-//         //             target_y_compensated,
-//         //             atomic_lidar_valid.load() ? lidar_x : std::nanf(""),
-//         //             atomic_lidar_valid.load() ? lidar_y : std::nanf(""),
-//         //             static_cast<int16_t>(steer),
-//         //             tx_flags,       // 0x01 전송
-//         //             downlink_seq++
-//         //         );
-
-//         //         // 💡 7. [추가] 어뢰로 나가는 데이터 터미널 출력 (100ms에 한 번씩 샘플링)
-//         //         static int tx_log_counter = 0;
-//         //         if (tx_log_counter++ % 100 == 0) {
-//         //             float current_tar_x = atomic_tar_x_meters.load();
-//         //             fprintf(stdout, "\n==================================================\n");
-//         //             fprintf(stdout, "[Zynq -> Torpedo Downlink Packet Transmitted]\n");
-//         //             fprintf(stdout, "  |- [SEQ]       : %u\n", downlink_seq - 1);
-//         //             fprintf(stdout, "  |- [TARGET]    : X = %.2f m, Y = %.2f m  (From GUI)\n", current_tar_x, target_y_compensated);
-//         //             fprintf(stdout, "  |- [LIDAR_EST] : X = %.2f m, Y = %.2f m  (To Torpedo)\n", 
-//         //                     atomic_lidar_valid.load() ? lidar_x : 0.0f, 
-//         //                     atomic_lidar_valid.load() ? lidar_y : 0.0f);
-//         //             fprintf(stdout, "  |- [STEER]     : %d deg\n", static_cast<int16_t>(steer));
-//         //             fprintf(stdout, "  |- [FLAGS]     : 0x%02X  (0x01:MID, 0x02:TERM)\n", tx_flags);
-//         //             fprintf(stdout, "==================================================\n");
-//         //             fprintf(stdout, "[Torpedo -> Zynq RX] Ctrl_Uplink:(%.2f, %.2f)\n",uplink_x_m, uplink_y_m);
-//         //         }
-//         //     }
-
-//             } else if (is_launched) {
-//                 // ── [중기유도 상태] 통제소에서 조향각 계산 ──
-//                 tx_flags = FLAG_GUIDANCE_MIDCOURSE; // 0x01
+//                 tx_flags = FLAG_GUIDANCE_TERMINAL;
+//                 uart_torpedo->sendDownlink(std::nanf(""), std::nanf(""), std::nanf(""), std::nanf(""), 0, tx_flags, downlink_seq);
+//                 downlink_seq++;
+//             } 
+//             else if (is_launched.load()) { 
+//                 tx_flags = FLAG_GUIDANCE_MIDCOURSE;
 
 //                 float lidar_x = atomic_torpedo_x_m.load();
 //                 float lidar_y = atomic_torpedo_y_m.load();
@@ -348,57 +216,151 @@ void thread_gui_tx() {
 //                 TorpedoPose state_copy;
 //                 {
 //                     std::lock_guard<std::mutex> lock(mtx);
-//                     state_copy = current_torpedo_state;
+//                     state_copy = current_torpedo_state; 
 //                 }
 
-//                 // [임시] 통신 전이므로 피드백 기준은 라이다로 설정
-//                 float control_x = lidar_x; 
-//                 float control_y = lidar_y; 
+//                 // [수정 지점 1: Zynq-Est 데이터 동결 버그 제거 및 원본 직결]
+//                 float control_x = 0.0f;
+//                 float control_y = 0.0f;
 
-//                 // 1. Zynq 내부 제어용 웨이포인트 Y 계산 (어뢰 전송용 X)
+//                 if (atomic_lidar_valid.load()) {
+//                     control_x = lidar_x;
+//                     control_y = lidar_y;
+//                 } else {
+//                     // 라이다가 유실되면, 과거의 얼어붙은 포지션 대신 
+//                     // 통신(Uplink)으로 들어온 Zynq 원본 좌표를 그대로 제어 변수에 주입합니다.
+//                     control_x = state_copy.position.x;
+//                     control_y = state_copy.position.y;
+//                 }
+
+//                 // 1️⃣ [A* Planner 검증 지점]
 //                 float target_y_compensated = 0.0f;
 //                 if (astar_planner && atomic_astar_valid.load()) {
 //                     target_y_compensated = astar_planner->getNextWaypointY(control_x, 0.15f);
 //                 }
 
-//                 // 2. Zynq 내부 조향각 계산 (임시 15cm 앞 웨이포인트 기준)
-//                 int steer = latency_controller->compute(
-//                     control_y,
-//                     target_y_compensated,
-//                     0.01f
+//                 // [look_ahead_dist 축소 및 변수 조정]
+//                 // 1️⃣ [LookAhead 거리 계산 지점 보완]
+//                 float y_error = std::abs(target_y_compensated - control_y);
+
+//                 // 🔥 [개선 1] 종착지 직전 특이점 방지를 위해 최소 LookAhead 하한선을 0.3m -> 0.5m로 상향 조정
+//                 float look_ahead_dist = 0.5f + (y_error * 0.4f); 
+//                 if (look_ahead_dist > 1.2f) look_ahead_dist = 1.2f;
+
+//                 // 2️⃣ [Geometric Math]
+//                 float dx = 0.0f - control_x; 
+//                 float target_yaw = std::atan2(dx, look_ahead_dist); 
+//                 float current_yaw = state_copy.heading; 
+
+//                 // 3️⃣ [Latency Aware Controller 호출]
+//                 int pure_controller_steer = latency_controller->compute(
+//                     control_y, target_y_compensated, 0.01f, current_yaw, target_yaw
 //                 );
 
-//                 // 3. 🎯 다운링크 전송 수정
-//                 // target_x, target_y 자리에는 "GUI 원본 최종 목적지"를 그대로 넣어줍니다.
+//                 // 부호 고착 방지 로직 (유지)
+//                 if (target_yaw < 0.0f && pure_controller_steer > 0) {
+//                     pure_controller_steer = -pure_controller_steer;
+//                 } else if (target_yaw > 0.0f && pure_controller_steer < 0) {
+//                     pure_controller_steer = -pure_controller_steer;
+//                 }
+
+//                 // Target Yaw 오차 크기에 따른 선형 스케일링 (유지)
+//                 float target_yaw_deg = target_yaw * (180.0f / M_PI);
+//                 float yaw_error_abs = std::abs(target_yaw_deg);
+//                 if (yaw_error_abs < 15.0f) {
+//                     float scaling_factor = yaw_error_abs / 15.0f;
+//                     pure_controller_steer = static_cast<int>(pure_controller_steer * scaling_factor);
+//                 }
+
+//                 // 4️⃣ [Cross-Track 보정항 - 종착지 감쇄 기능 추가]
+//                 float x_error = -control_x; 
+//                 float x_correction = x_error * 30.0f; 
+
+//                 // 🔥 [개선 2] 목표지점(Y=2.0m)에 도달할수록 X축 오차를 잡으려는 과도한 보정항을 서서히 지웁니다.
+//                 // Y가 1.5m를 넘어 목표치인 2.0m에 가까워질수록 fade_factor는 1.0에서 0.0으로 줄어듭니다.
+//                 float fade_factor = 1.0f;
+//                 if (control_y > 1.5f) {
+//                     fade_factor = (2.0f - control_y) / 0.5f; // 1.5m에서 1.0, 2.0m에서 0.0
+//                     if (fade_factor < 0.0f) fade_factor = 0.0f;
+//                 }
+//                 x_correction = x_correction * fade_factor; // 감쇄 적용
+//                 x_correction = std::max(-20.0f, std::min(20.0f, x_correction)); 
+
+//                 // 5️⃣ [최종 조향 연산]
+//                 int final_steer = pure_controller_steer + static_cast<int>(x_correction);
+//                 int steer = final_steer;
+
+//                 bool invert_hardware_steering = false;
+//                 if (invert_hardware_steering) {
+//                     steer = -steer;
+//                 }
+
+//                 // Saturation (전체 상한선 제한)
+//                 int pre_clamp_steer = steer;
+//                 if (steer > 30) steer = 30;
+//                 if (steer < -30) steer = -30;
+
+//                 // Rate Limiter (루프당 변위 제한)
+//                 static int last_steer = 0;
+//                 constexpr int MAX_STEER_DIFF = 4; 
+//                 int steer_diff = steer - last_steer;
+//                 if (steer_diff > MAX_STEER_DIFF)  steer = last_steer + MAX_STEER_DIFF;
+//                 if (steer_diff < -MAX_STEER_DIFF) steer = last_steer - MAX_STEER_DIFF;
+//                 last_steer = steer;
+
+//                 if (state_copy.seq == 0 || !atomic_astar_valid.load()) {
+//                     steer = 0;
+//                     target_yaw = 0.0f;
+//                 }
+
 //                 float raw_target_x = atomic_tar_x_meters.load();
-//                 float raw_target_y = atomic_tar_y_meters.load(); // 💡 GUI 원본 Y 축 원자적 변수 사용
+//                 float raw_target_y = atomic_tar_y_meters.load(); 
 
 //                 uart_torpedo->sendDownlink(
-//                     raw_target_x,                                       // 어뢰가 기억할 최종 목적지 X
-//                     raw_target_y,                                       // 어뢰가 기억할 최종 목적지 Y (보정값 X)
-//                     atomic_lidar_valid.load() ? lidar_x : std::nanf(""),
-//                     atomic_lidar_valid.load() ? lidar_y : std::nanf(""),
-//                     static_cast<int16_t>(steer),                        // Zynq가 계산한 중기유도 조향 명령
-//                     tx_flags,
-//                     downlink_seq++
+//                     raw_target_x, raw_target_y, 
+//                     atomic_lidar_valid.load() ? lidar_x : std::nanf(""), 
+//                     atomic_lidar_valid.load() ? lidar_y : std::nanf(""), 
+//                     static_cast<int16_t>(steer), tx_flags, downlink_seq
 //                 );
 
-//                 // 4. 로그 출력 부분도 매칭되도록 수정
+//                 // 대시보드 출력
 //                 static int tx_log_counter = 0;
-//                 if (tx_log_counter++ % 100 == 0) {
+//                 if (tx_log_counter++ % 80 == 0) {
 //                     fprintf(stdout, "\n==================================================\n");
-//                     fprintf(stdout, "[Zynq -> Torpedo Downlink Packet Transmitted]\n");
-//                     fprintf(stdout, "  |- [SEQ]       : %u\n", downlink_seq - 1);
-//                     fprintf(stdout, "  |- [FINAL TG]  : X = %.2f m, Y = %.2f m  (To Torpedo Terminal)\n", raw_target_x, raw_target_y);
-//                     fprintf(stdout, "  |- [ZYNQ WP Y] : %.2f m (Internal Midcourse Look-ahead)\n", target_y_compensated);
-//                     fprintf(stdout, "  |- [LIDAR_EST] : X = %.2f m, Y = %.2f m  [Valid: %s]\n", lidar_x, lidar_y, atomic_lidar_valid.load() ? "OK" : "FAIL");
-//                     fprintf(stdout, "  |- [STEER]     : %d deg\n", static_cast<int16_t>(steer));
-//                     fprintf(stdout, "  |- [FLAGS]     : 0x%02X  (0x01:MID, 0x02:TERM)\n", tx_flags);
+//                     fprintf(stdout, "[Zynq <-> Torpedo 100-Loop Sync Dashboard]\n");
+//                     fprintf(stdout, "  [RX UPLINK]  SEQ: %u | Flags: 0x%02X\n", state_copy.seq, state_copy.flags);
+//                     // 모드 표시 이름을 Zynq-Est에서 Raw-Zynq로 직관적으로 변경
+//                     fprintf(stdout, "   |- Torpedo Pos: X = %.2f m, Y = %.2f m (Mode: %s)\n", 
+//                             control_x, control_y, (atomic_lidar_valid.load() ? "Pure-LiDAR" : "Raw-Zynq"));
+//                     fprintf(stdout, "   |- Torpedo Yaw: %.2f deg (Internal: %.4f rad)\n", state_copy.heading * (180.0f / M_PI), state_copy.heading);
+//                     fprintf(stdout, "  -------------------------------------------------\n");
+                    
+//                     fprintf(stdout, "  [🔧 DEEP DIAGNOSTIC BREAKDOWN]\n");
+//                     fprintf(stdout, "   1) A* Planner  -> Comp Y: %.4f m (Target Y: %.2f)\n", target_y_compensated, raw_target_y);
+//                     fprintf(stdout, "   2) Geometry    -> Target Yaw: %.2f deg | LookAhead: %.2fm\n", target_yaw * (180.0f / M_PI), look_ahead_dist);
+//                     fprintf(stdout, "   3) LatencyCtrl -> Pure Controller Output: %d (Scaled)\n", pure_controller_steer);
+//                     fprintf(stdout, "   4) Thread5 Math-> X Pos: %.3f m | x_error: %.3f | x_correction: %.2f\n", control_x, x_error, x_correction);
+//                     fprintf(stdout, "   5) Total Sum   -> Pre-Clamp: %d -> Post-Clamp: %d\n", pre_clamp_steer, steer);
+//                     fprintf(stdout, "  -------------------------------------------------\n");
+                    
+//                     fprintf(stdout, "  [TX DOWNLINK] SEQ: %u | Flags: 0x%02X\n", downlink_seq, tx_flags);
+//                     fprintf(stdout, "   |- Target WP  : X = %.2f m, Y = %.2f m (Comp Y: %.2f m)\n", raw_target_x, raw_target_y, target_y_compensated);
+//                     fprintf(stdout, "   |- LiDAR Sync : X = %.2f m, Y = %.2f m\n", lidar_x, lidar_y);
+//                     fprintf(stdout, "   |- Target Yaw : %.2f deg (LookAhead: %.2fm)\n", target_yaw * (180.0f / M_PI), look_ahead_dist);
+//                     fprintf(stdout, "   |- STEER CMD  : %d deg\n", static_cast<int16_t>(steer));
 //                     fprintf(stdout, "==================================================\n");
+//                 }
+                
+//                 downlink_seq++;
+//             }
+//             else {
+//                 static int ready_log_counter = 0;
+//                 if (ready_log_counter++ % 100 == 0) {
+//                     fprintf(stdout, "[Thread 5] Control Loop Alive - Waiting for GUI CMD_FIRE\n");
+//                     fflush(stdout);
 //                 }
 //             }
 //         }
-
 
 //         auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(
 //             std::chrono::steady_clock::now() - loop_start).count();
@@ -406,95 +368,220 @@ void thread_gui_tx() {
 //         if (sleep_us > 0) usleep(sleep_us);
 //     }
 // }
+
 void thread_control_loop() {
+    static bool is_arrived = false; // 🌟 통신 모드가 바뀌어도 정지 상태가 유지되도록 스레드 내 래치 플래그 선언
+
     while (system_running.load()) {
         auto loop_start = std::chrono::steady_clock::now();
 
         if (uart_torpedo) {
             uint8_t tx_flags = 0;
             
-            if (is_terminal_guidance.load()) {
-                // ── [종말유도 상태] 생략 (기존 코드 유지) ──
-                tx_flags = FLAG_GUIDANCE_TERMINAL;
-                uart_torpedo->sendDownlink(std::nanf(""), std::nanf(""), std::nanf(""), std::nanf(""), 0, tx_flags, downlink_seq++);
-            } 
-            else if (is_launched) {
-                // ── [중기유도 상태] 통제소 제어 및 데이터 융합 ──
-                tx_flags = FLAG_GUIDANCE_MIDCOURSE; // 0x01
+            // 1️⃣ [도달 정지 모드 최우선 처리] 이미 목표에 도달했다면 제어 연산을 건너뛰고 정지 패킷만 송신
+            if (is_arrived) {
+                tx_flags = FLAG_GUIDANCE_ARRIVE; // 0x03 정지 flag 설정
+                int16_t steer = 0;               // 조타 정중앙 고정
+                
+                float raw_target_x = atomic_tar_x_meters.load();
+                float raw_target_y = atomic_tar_y_meters.load(); 
+                float lidar_x = atomic_torpedo_x_m.load();
+                float lidar_y = atomic_torpedo_y_m.load();
 
-                // 라이다 동적 객체 데이터 추출 -> 어뢰의 위치 추정(참고용)을 위해 다운링크로 쏴줌
+                uart_torpedo->sendDownlink(
+                    raw_target_x, raw_target_y, 
+                    atomic_lidar_valid.load() ? lidar_x : std::nanf(""), 
+                    atomic_lidar_valid.load() ? lidar_y : std::nanf(""), 
+                    steer, tx_flags, downlink_seq
+                );
+
+                static int arrive_log_counter = 0;
+                if (arrive_log_counter++ % 80 == 0) {
+                    fprintf(stdout, "\n==================================================\n");
+                    fprintf(stdout, "[Thread 5] 🏁 TARGET ARRIVED -> MOTOR STOP ACTIVE (0x03)\n");
+                    fprintf(stdout, "   |- Target WP : X = %.2f m, Y = %.2f m\n", raw_target_x, raw_target_y);
+                    fprintf(stdout, "   |- Current   : X = %.2f m, Y = %.2f m\n", 
+                            (atomic_lidar_valid.load() ? lidar_x : current_torpedo_state.position.x),
+                            (atomic_lidar_valid.load() ? lidar_y : current_torpedo_state.position.y));
+                    fprintf(stdout, "==================================================\n");
+                    fflush(stdout);
+                }
+                downlink_seq++;
+            }
+            else if (is_terminal_guidance.load()) {
+                tx_flags = FLAG_GUIDANCE_TERMINAL;
+                uart_torpedo->sendDownlink(std::nanf(""), std::nanf(""), std::nanf(""), std::nanf(""), 0, tx_flags, downlink_seq);
+                downlink_seq++;
+            } 
+            else if (is_launched.load()) { 
+                tx_flags = FLAG_GUIDANCE_MIDCOURSE;
+
                 float lidar_x = atomic_torpedo_x_m.load();
                 float lidar_y = atomic_torpedo_y_m.load();
 
                 TorpedoPose state_copy;
                 {
                     std::lock_guard<std::mutex> lock(mtx);
-                    state_copy = current_torpedo_state; // 어뢰가 보낸 최신 Uplink 패킷 복사
+                    state_copy = current_torpedo_state; 
                 }
 
-                // 1. 🎯 피드백 기준점 설정: "어뢰 자체 추정 좌표" 활용
-                float control_x = state_copy.position.x; 
-                float control_y = state_copy.position.y; 
+                // [Zynq-Est 데이터 동결 버그 제거 및 원본 직결]
+                float control_x = 0.0f;
+                float control_y = 0.0f;
 
-                // 2. A* 기반 지연 선행 보정 웨이포인트 Y 계산 (어뢰의 X 좌표 기준)
+                if (atomic_lidar_valid.load()) {
+                    control_x = lidar_x;
+                    control_y = lidar_y;
+                } else {
+                    control_x = state_copy.position.x;
+                    control_y = state_copy.position.y;
+                }
+
+                float raw_target_x = atomic_tar_x_meters.load();
+                float raw_target_y = atomic_tar_y_meters.load(); 
+
+                // 🎯 [실시간 Target WP 기준 오차 판정 (X ± 0.15m, Y ± 0.15m)]
+                if (std::abs(control_x - raw_target_x) <= 0.15f && std::abs(control_y - raw_target_y) <= 0.15f) {
+                    is_arrived = true;               // 정지 플래그 온
+                    tx_flags = FLAG_GUIDANCE_ARRIVE; // 0x03 변경
+                    int16_t steer = 0;               // 모터 정지 시 조타 정중앙
+
+                    uart_torpedo->sendDownlink(
+                        raw_target_x, raw_target_y, 
+                        atomic_lidar_valid.load() ? lidar_x : std::nanf(""), 
+                        atomic_lidar_valid.load() ? lidar_y : std::nanf(""), 
+                        steer, tx_flags, downlink_seq
+                    );
+                    downlink_seq++;
+                    
+                    // 정밀 주기 유지를 위해 잔여 시간 계산 후 탈출
+                    auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(
+                        std::chrono::steady_clock::now() - loop_start).count();
+                    long sleep_us = 10000 - elapsed;
+                    if (sleep_us > 0) usleep(sleep_us);
+                    continue; 
+                }
+
+                // 1️⃣ [A* Planner 검증 지점]
                 float target_y_compensated = 0.0f;
                 if (astar_planner && atomic_astar_valid.load()) {
                     target_y_compensated = astar_planner->getNextWaypointY(control_x, 0.15f);
                 }
 
-                // 3. 기하학적 목표 헤딩(Target Yaw) 계산 (라디안 단위 결과 도출)
-                float look_ahead_dist = (0.15f * 0.08f) + 0.12f; 
-                float target_yaw = std::atan2(target_y_compensated - control_y, look_ahead_dist);
+                // 1️⃣ [LookAhead 거리 계산 지점 보완]
+                float y_error = std::abs(target_y_compensated - control_y);
 
-                // 4. 🎯 어뢰 실제 헤딩 추출 (헤더 정의에 따라 degree -> radian 변환 적용)
-                float current_yaw = state_copy.heading * (M_PI / 180.0f);
+                // 종착지 직전 특이점 방지를 위해 최소 LookAhead 하한선을 0.3m -> 0.5m로 상향 조정
+                float look_ahead_dist = 0.5f + (y_error * 0.4f); 
+                if (look_ahead_dist > 1.2f) look_ahead_dist = 1.2f;
 
-                // 5. 🎯 등속도 운행 기반 융합 제어 알고리즘 호출 -> 조향각(steer) 도출
-                int steer = latency_controller->compute(
-                    control_y,
-                    target_y_compensated,
-                    0.01f,          // dt (10ms)
-                    current_yaw,    // 어뢰 실제 헤딩 (라디안)
-                    target_yaw      // 목적지 헤딩 (라디안)
+                // 2️⃣ [Geometric Math]
+                float dx = 0.0f - control_x; 
+                float target_yaw = std::atan2(dx, look_ahead_dist); 
+                float current_yaw = state_copy.heading; 
+
+                // 3️⃣ [Latency Aware Controller 호출]
+                int pure_controller_steer = latency_controller->compute(
+                    control_y, target_y_compensated, 0.01f, current_yaw, target_yaw
                 );
 
-                // 6. 다운링크 전송 (원 목적지 + 라이다 참조 좌표 + 계산된 steer 명령)
-                float raw_target_x = atomic_tar_x_meters.load();
-                float raw_target_y = atomic_tar_y_meters.load(); 
+                // 부호 고착 방지 로직 (유지)
+                if (target_yaw < 0.0f && pure_controller_steer > 0) {
+                    pure_controller_steer = -pure_controller_steer;
+                } else if (target_yaw > 0.0f && pure_controller_steer < 0) {
+                    pure_controller_steer = -pure_controller_steer;
+                }
+
+                // Target Yaw 오차 크기에 따른 선형 스케일링 (유지)
+                float target_yaw_deg = target_yaw * (180.0f / M_PI);
+                float yaw_error_abs = std::abs(target_yaw_deg);
+                if (yaw_error_abs < 15.0f) {
+                    float scaling_factor = yaw_error_abs / 15.0f;
+                    pure_controller_steer = static_cast<int>(pure_controller_steer * scaling_factor);
+                }
+
+                // 4️⃣ [Cross-Track 보정항 - 종착지 감쇄 기능 추가]
+                float x_error = -control_x; 
+                float x_correction = x_error * 30.0f; 
+
+                // 목표지점(Y=2.0m)에 도달할수록 X축 오차를 잡으려는 과도한 보정항을 서서히 지웁니다.
+                float fade_factor = 1.0f;
+                if (control_y > 1.5f) {
+                    fade_factor = (2.0f - control_y) / 0.5f; // 1.5m에서 1.0, 2.0m에서 0.0
+                    if (fade_factor < 0.0f) fade_factor = 0.0f;
+                }
+                x_correction = x_correction * fade_factor; // 감쇄 적용
+                x_correction = std::max(-20.0f, std::min(20.0f, x_correction)); 
+
+                // 5️⃣ [최종 조향 연산]
+                int final_steer = pure_controller_steer + static_cast<int>(x_correction);
+                int steer = final_steer;
+
+                bool invert_hardware_steering = false;
+                if (invert_hardware_steering) {
+                    steer = -steer;
+                }
+
+                // Saturation (전체 상한선 제한)
+                int pre_clamp_steer = steer;
+                if (steer > 30) steer = 30;
+                if (steer < -30) steer = -30;
+
+                // Rate Limiter (루프당 변위 제한)
+                static int last_steer = 0;
+                constexpr int MAX_STEER_DIFF = 4; 
+                int steer_diff = steer - last_steer;
+                if (steer_diff > MAX_STEER_DIFF)  steer = last_steer + MAX_STEER_DIFF;
+                if (steer_diff < -MAX_STEER_DIFF) steer = last_steer - MAX_STEER_DIFF;
+                last_steer = steer;
+
+                if (state_copy.seq == 0 || !atomic_astar_valid.load()) {
+                    steer = 0;
+                    target_yaw = 0.0f;
+                }
 
                 uart_torpedo->sendDownlink(
-                    raw_target_x,                                       
-                    raw_target_y,                                       
-                    atomic_lidar_valid.load() ? lidar_x : std::nanf(""), // 어뢰 전송용 라이다 X
-                    atomic_lidar_valid.load() ? lidar_y : std::nanf(""), // 어뢰 전송용 라이다 Y
-                    static_cast<int16_t>(steer),                         // 어뢰를 움직일 조향 제어 명령
-                    tx_flags,
-                    downlink_seq
+                    raw_target_x, raw_target_y, 
+                    atomic_lidar_valid.load() ? lidar_x : std::nanf(""), 
+                    atomic_lidar_valid.load() ? lidar_y : std::nanf(""), 
+                    static_cast<int16_t>(steer), tx_flags, downlink_seq
                 );
 
-                // 7. 🎯 100개 단위(1초) TX & RX 데이터 대시보드 출력
+                // 대시보드 출력
                 static int tx_log_counter = 0;
-                if (tx_log_counter++ % 100 == 0) {
+                if (tx_log_counter++ % 80 == 0) {
                     fprintf(stdout, "\n==================================================\n");
                     fprintf(stdout, "[Zynq <-> Torpedo 100-Loop Sync Dashboard]\n");
+                    fprintf(stdout, "  [RX UPLINK]  SEQ: %u | Flags: 0x%02X\n", state_copy.seq, state_copy.flags);
+                    fprintf(stdout, "   |- Torpedo Pos: X = %.2f m, Y = %.2f m (Mode: %s)\n", 
+                            control_x, control_y, (atomic_lidar_valid.load() ? "Pure-LiDAR" : "Raw-Zynq"));
+                    fprintf(stdout, "   |- Torpedo Yaw: %.2f deg (Internal: %.4f rad)\n", state_copy.heading * (180.0f / M_PI), state_copy.heading);
+                    fprintf(stdout, "  -------------------------------------------------\n");
                     
-                    // --- RX (어뢰에서 들어온 값 구조체 매핑 확인) ---
-                    fprintf(stdout, " [RX UPLINK]  SEQ: %u | Flags: 0x%02X\n", state_copy.seq, state_copy.flags);
-                    fprintf(stdout, "  |- Torpedo Pos: X = %.2f m, Y = %.2f m\n", state_copy.position.x, state_copy.position.y);
-                    fprintf(stdout, "  |- Torpedo Yaw: %.2f deg (Internal: %.4f rad)\n", state_copy.heading, current_yaw);
+                    fprintf(stdout, "  [🔧 DEEP DIAGNOSTIC BREAKDOWN]\n");
+                    fprintf(stdout, "   1) A* Planner  -> Comp Y: %.4f m (Target Y: %.2f)\n", target_y_compensated, raw_target_y);
+                    fprintf(stdout, "   2) Geometry    -> Target Yaw: %.2f deg | LookAhead: %.2fm\n", target_yaw * (180.0f / M_PI), look_ahead_dist);
+                    fprintf(stdout, "   3) LatencyCtrl -> Pure Controller Output: %d (Scaled)\n", pure_controller_steer);
+                    fprintf(stdout, "   4) Thread5 Math-> X Pos: %.3f m | x_error: %.3f | x_correction: %.2f\n", control_x, x_error, x_correction);
+                    fprintf(stdout, "   5) Total Sum   -> Pre-Clamp: %d -> Post-Clamp: %d\n", pre_clamp_steer, steer);
+                    fprintf(stdout, "  -------------------------------------------------\n");
                     
-                    fprintf(stdout, " -------------------------------------------------\n");
-                    
-                    // --- TX (어뢰로 날아가는 값 구조체 매핑 확인) ---
-                    fprintf(stdout, " [TX DOWNLINK] SEQ: %u | Flags: 0x%02X\n", downlink_seq, tx_flags);
-                    fprintf(stdout, "  |- Target WP  : X = %.2f m, Y = %.2f m (Comp Y: %.2f m)\n", raw_target_x, raw_target_y, target_y_compensated);
-                    fprintf(stdout, "  |- LiDAR Sync : X = %.2f m, Y = %.2f m\n", lidar_x, lidar_y);
-                    fprintf(stdout, "  |- Target Yaw : %.2f deg\n", target_yaw * (180.0f / M_PI));
-                    fprintf(stdout, "  |- STEER CMD  : %d deg (Mapped: -45 to +45)\n", static_cast<int16_t>(steer));
+                    fprintf(stdout, "  [TX DOWNLINK] SEQ: %u | Flags: 0x%02X\n", downlink_seq, tx_flags);
+                    fprintf(stdout, "   |- Target WP  : X = %.2f m, Y = %.2f m (Comp Y: %.2f m)\n", raw_target_x, raw_target_y, target_y_compensated);
+                    fprintf(stdout, "   |- LiDAR Sync : X = %.2f m, Y = %.2f m\n", lidar_x, lidar_y);
+                    fprintf(stdout, "   |- Target Yaw : %.2f deg (LookAhead: %.2fm)\n", target_yaw * (180.0f / M_PI), look_ahead_dist);
+                    fprintf(stdout, "   |- STEER CMD  : %d deg\n", static_cast<int16_t>(steer));
                     fprintf(stdout, "==================================================\n");
                 }
                 
                 downlink_seq++;
+            }
+            else {
+                static int ready_log_counter = 0;
+                if (ready_log_counter++ % 100 == 0) {
+                    fprintf(stdout, "[Thread 5] Control Loop Alive - Waiting for GUI CMD_FIRE\n");
+                    fflush(stdout);
+                }
             }
         }
 
@@ -504,7 +591,6 @@ void thread_control_loop() {
         if (sleep_us > 0) usleep(sleep_us);
     }
 }
-
 
 // ─────────────────────────────────────────
 // Thread 6: Network TCP Accept 처리
@@ -524,12 +610,8 @@ void thread_udp_rx() {
     while (system_running.load()) {
         if (network->receiveTargetUDP(pkt)) {
             if (pkt.type == CMD_TARGET) {
-                std::lock_guard<std::mutex> lock(mtx);
-                gui_target.x = pkt.target_x * 1000.0f;
-                gui_target.y = pkt.target_y * 1000.0f;
                 atomic_tar_x_meters.store(pkt.target_x);
                 atomic_tar_y_meters.store(pkt.target_y);
-                // fprintf(stderr, "[UDP RX] Target Set: (%.3f, %.3f) m\n", pkt.target_x, pkt.target_y);
                 fflush(stderr);
             }
         }
@@ -546,7 +628,6 @@ void thread_astar_path_planning() {
         auto t_start = std::chrono::steady_clock::now();
 
         if (astar_planner) {
-            // 미터 단위 구조체 매핑 연산 실행
             Waypoint start_pos = { atomic_torpedo_x_m.load(), atomic_torpedo_y_m.load() };
             Waypoint goal_pos  = { atomic_tar_x_meters.load(), atomic_tar_y_meters.load() };
             
@@ -562,25 +643,32 @@ void thread_astar_path_planning() {
     }
 }
 
+// 🎯 버그 수정: Linux 시그널 수신 시 안전 탈출을 유도하는 핸들러 정의
+void signalHandler(int signum) {
+    fprintf(stderr, "\n[SIGNAL] Shutdown signal (%d) received. Cleaning up threads...\n", signum);
+    system_running.store(false);
+}
+
 // ── 시스템 메인 진입점 ────────────────────────────────────
 int main() {
+    // 🎯 버그 수정: 메인 함수 시작 시그널 핸들러 등록
+    std::signal(SIGINT, signalHandler);  
+    std::signal(SIGTERM, signalHandler); 
+
     system_start_time = std::chrono::steady_clock::now();
     const int LATENCY_MS = 80;
     
     fprintf(stderr, "=== Control Station Booting ===\n");
     fflush(stderr);
      
-
     // 1. Lidar 초기화
     fprintf(stderr, "[1/7] Initializing Lidar...\n");
     try {
-        // lidar = std::make_unique<LidarNode>("/dev/ttyUSB0", 460800);
         lidar = std::make_unique<LidarNode>("/dev/ttyPS1", 460800);
         fprintf(stderr, "[1/7] Lidar OK\n");
         std::cout << "\n👉 [Lidar] 주변을 비운 뒤, 배경 학습을 시작하려면 [Enter] 키를 누르세요..." << std::endl;
         std::string dummy;
         std::getline(std::cin, dummy);
-        // 💡 [필수 추가] 스레드 켜기 전에 3초 동안 가만히 있는 상태에서 배경 학습!
         lidar->startCalibration(3); 
         
     } catch (...) {
@@ -656,8 +744,13 @@ int main() {
     fprintf(stderr, "\n=== System Full-Running ===\n\n");
     fflush(stderr);
 
+// accept 블로킹 상태인 t6은 독립(detach)시켜 프로세스 종료 시 자동 수거되도록 함
+    t6.detach(); 
+
+    // 나머지 스레드들은 루프를 빠져나올 때까지 안전하게 join
     t1.join(); t2.join(); t3.join(); t4.join(); 
-    t5.join(); t6.join(); t7.join(); t8.join();
+    t5.join(); t7.join(); t8.join();
 
     return 0;
+
 }

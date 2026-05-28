@@ -71,9 +71,10 @@ public:
         while (yaw_error >  M_PI) yaw_error -= 2.0f * M_PI; // -π ~ +π 정규화
         while (yaw_error < -M_PI) yaw_error += 2.0f * M_PI;
         
-        float k_yaw = 15.0f; // 수조 실험을 통해 최적화할 Yaw 게인
+        float k_yaw = 5.0f; // 수조 실험을 통해 최적화할 Yaw 게인
         float yaw_term = yaw_error * k_yaw;
-
+        yaw_term = std::max(-10.0f, std::min(10.0f, yaw_term));
+        
         // ── 조향각 최종 계산 및 물리 리밋 적용 (-45 ~ +45 범위 매핑) ──
         float steer_raw = p_term + d_term + yaw_term;
         steer_raw = std::max(-45.0f, std::min(45.0f, steer_raw));
