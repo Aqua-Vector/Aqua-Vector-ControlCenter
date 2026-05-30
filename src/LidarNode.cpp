@@ -163,28 +163,45 @@ void LidarNode::filterBackground(
 // ═══════════════════════════════════════════════
 // 5단계: 클러스터링 (인접 점 그룹화)
 // ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════
+// 개선된 5단계: 클러스터링 (인접 점 그룹화 및 노이즈 필터링)
+// ═══════════════════════════════════════════════
 std::vector<std::vector<Point2D>> LidarNode::doClustering(const std::vector<Point2D>& points) {
     std::vector<std::vector<Point2D>> clusters;
     if (points.empty()) return clusters;
 
-    float threshold = 300.0f;  
+    // 🎯 [파라미터 튜닝] 단위가 mm라면 300~400 사이에서 물체 거리에 따라 조절 필요
+    float threshold = 350.0f;  
+    
+    // 🎯 작은 물체 유실을 방지하기 위한 최소 점 개수 하한선 (기존에 상위 단에 있었다면 여기로 통합 권장)
+    size_t min_cluster_size = 3; 
+    size_t max_cluster_size = 100;
+
     std::vector<Point2D> current_cluster;
     current_cluster.push_back(points[0]);
 
     for (size_t i = 1; i < points.size(); ++i) {
-        float dx = points[i].x - points[i-1].x;
-        float dy = points[i].y - points[i-1].y;
+        // 🔥 [개선] 직전 점(i-1) 뿐만 아니라, 현재 클러스터의 '마지막 원소'와 비교
+        // 이렇게 하면 중간에 점이 하나 누락되어도 cluster의 형태를 유지하며 묶을 수 있음
+        float dx = points[i].x - current_cluster.back().x;
+        float dy = points[i].y - current_cluster.back().y;
         float dist = std::sqrt(dx*dx + dy*dy);
 
         if (dist < threshold) {
             current_cluster.push_back(points[i]);
         } else {
-            clusters.push_back(current_cluster);
+            // 조건을 만족하는 클러스터만 최종 리스트에 추가
+            if (current_cluster.size() >= min_cluster_size && current_cluster.size() <= max_cluster_size) {
+                clusters.push_back(current_cluster);
+            }
+            
             current_cluster.clear();
             current_cluster.push_back(points[i]);
         }
     }
-    if (!current_cluster.empty()) {
+    
+    // 마지막 잔여 클러스터 처리
+    if (current_cluster.size() >= min_cluster_size && current_cluster.size() <= max_cluster_size) {
         clusters.push_back(current_cluster);
     }
     
